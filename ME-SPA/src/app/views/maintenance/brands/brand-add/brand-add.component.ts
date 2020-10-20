@@ -26,6 +26,7 @@ export class BrandAddComponent implements OnInit {
 
   cancel() {
     this.brand = {};
+    var tes="fasds";
   }
 
   save() {
