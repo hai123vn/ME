@@ -65,9 +65,13 @@ namespace ME_API
 
             //Repository
             services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IAuditTypeRepository, AuditTypeRepository>();
+            services.AddScoped<IAuditTypeDRepository, AuditTypeDRepository>();
 
             //Services
             services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IAuditTypeService, AuditTypeService>();
+            
 
             // Swagger
             services.AddSwaggerGen(c =>

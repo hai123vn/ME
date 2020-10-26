@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -16,6 +17,11 @@ namespace ME_API.Data
         public void Add(T entity)
         {
             _context.Add(entity);
+        }
+
+        public void AddMultiple(List<T> entities)
+        {
+           _context.AddRange(entities);
         }
 
         public IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties)

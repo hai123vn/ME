@@ -18,6 +18,8 @@ export class BrandAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.brandService.currentBrand.subscribe(brand => this.brand = brand);
+    this.brandService.currentFlag.subscribe(flag => this.flag = flag);
   }
 
   backList() {
@@ -26,7 +28,6 @@ export class BrandAddComponent implements OnInit {
 
   cancel() {
     this.brand = {};
-    var tes="fasds";
   }
 
   save() {

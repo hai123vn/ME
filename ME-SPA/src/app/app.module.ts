@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -20,6 +21,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { AlertifyService } from './_core/_service/alertify.service';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -42,10 +44,18 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AlertComponent } from 'ngx-bootstrap/alert';
-import { AlertifyService } from './_core/_service/alertify.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrandListResolver } from './_core/_resolver/brand-list.resolver';
 
 @NgModule({
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+    },
+    BrandListResolver,
+    AlertifyService,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -61,8 +71,8 @@ import { AlertifyService } from './_core/_service/alertify.service';
     ChartsModule,
     HttpClientModule,
     CommonModule,
-    FormsModule
-
+    FormsModule,
+    NgxSpinnerModule,
   ],
   declarations: [
     AppComponent,
@@ -71,12 +81,6 @@ import { AlertifyService } from './_core/_service/alertify.service';
     P500Component,
     LoginComponent,
     RegisterComponent
-  ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy,
-  },
-    AlertifyService
   ],
 
   bootstrap: [AppComponent]

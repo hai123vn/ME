@@ -8,8 +8,10 @@ namespace ME_API.Helpers.AutoMapper
     {
         public EfToDtoMappingProfile()
         {
-            CreateMap<MES_Audit_Brand, BrandDto> ();
+            CreateMap<MES_Audit_Brand, BrandDto>();
+            CreateMap<MES_Audit_Type_M, AuditTypeDto>();
+            CreateMap<MES_Audit_Type_D, AuditType_D_Dto>();
         }
-        
+
     }
 }

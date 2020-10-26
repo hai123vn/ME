@@ -16,7 +16,7 @@ const routes: Routes = [
                 {
                     path: '',
                     component: BrandListComponent,
-                    // resolve: { brands: BrandListResolver},
+                    resolve: { brands: BrandListResolver},
                     data: {
                         title: 'Brand'
                     }

@@ -16,11 +16,12 @@ export class BrandUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.brandService.currentBrand.subscribe(brand => this.brand = brand);
+    this.brandService.currentFlag.subscribe(flag => this.flag = flag);
   }
 
   backList() {
-    this.router.navigate(['/maintenance/brand']);
+    this.router.navigate(['/maintenance']);
   }
 
   update() {
@@ -31,5 +32,9 @@ export class BrandUpdateComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  cancel() {
+    this.brand = {};
   }
 }

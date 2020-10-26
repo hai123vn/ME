@@ -7,6 +7,7 @@ using AutoMapper.QueryableExtensions;
 using ME_API._Repositories.Interfaces;
 using ME_API._Service.Interface;
 using ME_API.DTO;
+using ME_API.Helpers;
 using ME_API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,7 @@ namespace ME_API._Service.Service
             _repoBrand.Add(brand);
             return await _repoBrand.SaveAll();
         }
+
         //Kiem tra ton tai cua BrandID
         public async Task<bool> CheckBrandExists(string brandId)
         {
@@ -43,11 +45,34 @@ namespace ME_API._Service.Service
             _repoBrand.Remove(brand);
             return await _repoBrand.SaveAll();
         }
-        
+
         //Lấy toàn bộ danh sách Brand 
         public async Task<List<BrandDto>> GetAllAsyn()
         {
             return await _repoBrand.FindAll().ProjectTo<BrandDto>(_configMapper).OrderByDescending(x => x.Updated_Time).ToListAsync();
+        }
+
+        //Lay Brand theo Brand_Id
+        public BrandDto GetById(object id)
+        {
+            return _mapper.Map<MES_Audit_Brand, BrandDto>(_repoBrand.FindById(id));
+        }
+
+
+        //Lấy danh sách Brand và phân trang
+        public async Task<PagedList<BrandDto>> GetWithPaginations(PaginationParams param)
+        {
+            var lists = _repoBrand.FindAll().ProjectTo<BrandDto>(_configMapper).OrderByDescending(x => x.Updated_Time);
+            return await PagedList<BrandDto>.CreateAsync(lists, param.PageNumber, param.PageSize);
+        }
+
+        //Tìm kiếm brand
+        public async Task<PagedList<BrandDto>> Search(PaginationParams param, object text)
+        {
+            var lists = _repoBrand.FindAll().ProjectTo<BrandDto>(_configMapper)
+            .Where(x => x.Brand_ID.Contains(text.ToString()) || x.Brand_EN.Contains(text.ToString()) || x.Brand_LL.Contains(text.ToString()) || x.Brand_ZW.Contains(text.ToString()))
+            .OrderByDescending(x => x.Updated_Time);
+            return await PagedList<BrandDto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
 
         //Cap nhat Brand

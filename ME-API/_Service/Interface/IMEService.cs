@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ME_API.Helpers;
 
 namespace ME_API._Service.Interface
 {
@@ -9,6 +10,8 @@ namespace ME_API._Service.Interface
         Task<bool> Update(T model);
         Task<bool> Delete(object id);
         Task<List<T>> GetAllAsyn();
-
+        Task<PagedList<T>> GetWithPaginations(PaginationParams param);
+        Task<PagedList<T>> Search(PaginationParams param, object text);
+        T GetById(object id);
     }
 }
