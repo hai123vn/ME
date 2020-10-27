@@ -117,11 +117,19 @@ namespace ME_API._Service.Service
         {
             string audit_type_ID = "Audit";
             var items = await _repoAuditType.FindAll().Where(x => x.Audit_Type_ID.Contains(audit_type_ID)).OrderByDescending(x => x.Audit_Type_ID).FirstOrDefaultAsync();
-            if (items != null)
+            try
             {
-                var serinumber = items.Audit_Type_ID.Substring(6).ToInt();
-                var tmp = (serinumber >= 999) ? (serinumber + 1).ToString() : (serinumber >= 99) ? ("0" + (serinumber + 1)) : (serinumber < 9) ? ("000" + (serinumber + 1)) : ("0" + (serinumber + 1));
-                audit_type_ID = "Audit" + tmp;
+                if (items != null)
+                {
+                    var serinumber = items.Audit_Type_ID.Substring(6).ToInt();
+                    var tmp = (serinumber >= 999) ? (serinumber + 1).ToString() : (serinumber >= 99) ? ("0" + (serinumber + 1)) : (serinumber < 9) ? ("000" + (serinumber + 1)) : ("00" + (serinumber + 1));
+                    audit_type_ID = "Audit" + tmp;
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+                throw ex;
             }
             return audit_type_ID;
         }

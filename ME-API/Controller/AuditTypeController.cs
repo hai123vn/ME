@@ -50,8 +50,8 @@ namespace ME_API.Controller
         [HttpPost("create")]
         public async Task<IActionResult> Create(AuditTypeDto auditTypeDto)
         {
-            if (await _auditTypeService.CheckAuditTypeExists(auditTypeDto.Brand, auditTypeDto.Audit_Type_1, auditTypeDto.Audit_Type_2, auditTypeDto.Version))
-                return BadRequest("AuditType already exists!");
+            // if (await _auditTypeService.CheckAuditTypeExists(auditTypeDto.Brand, auditTypeDto.Audit_Type_1, auditTypeDto.Audit_Type_2, auditTypeDto.Version))
+            //     return BadRequest("AuditType already exists!");
 
             // var username = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             // auditTypeDto.Updated_By = username;
