@@ -45,9 +45,9 @@ namespace ME_API._Service.Service
 
         public async Task<bool> CheckAuditTypeExists(string brand, string auditType1, string auditType2, int version)
         {
-            var auditType = await _repoAuditType.FindAll().Where(x => x.Brand.Trim() == brand
-            && x.Audit_Type1.Trim() == auditType1
-            && x.Audit_Type2.Trim() == auditType2
+            var auditType = await _repoAuditType.FindAll().Where(x => x.Brand.Trim() == brand 
+            && x.Audit_Type1.Trim() == auditType1 
+            && x.Audit_Type2.Trim() == auditType2 
             && x.Version == version).ToListAsync();
             if (auditType.Count() > 0)
             {
@@ -95,20 +95,20 @@ namespace ME_API._Service.Service
         public async Task<object> GetAuditsByAuditType(AuditType1FormDto formData)
         {
             var data = await _repoAuditType.FindAll().ProjectTo<AuditTypeDto>(_configMapper)
-            .Where(x => x.Audit_Type_1.Trim() == formData.Audit_Type_1.Trim()).OrderByDescending(x => x.Updated_Time).ToListAsync();
+            .Where(x => x.Audit_Type1.Trim() == formData.Audit_Type_1.Trim()).OrderByDescending(x => x.Updated_Time).ToListAsync();
             var result = (from a in data
                           select new
                           {
-                              audit_type_ID = data.Where(y => y.Audit_Kind == a.Audit_Kind && y.Audit_Type_1 == a.Audit_Type_1
-                              && y.Audit_Type_2 == a.Audit_Type_2 && y.Brand == a.Brand &&
-                              y.Version == data.Where(x => x.Audit_Kind == a.Audit_Kind && x.Audit_Type_1 == a.Audit_Type_1
-                              && x.Audit_Type_2 == a.Audit_Type_2 && x.Brand == a.Brand).OrderByDescending(x => x.Version).FirstOrDefault().Version)
+                              audit_type_ID = data.Where(y => y.Audit_Kind == a.Audit_Kind && y.Audit_Type1 == a.Audit_Type1
+                              && y.Audit_Type2 == a.Audit_Type2 && y.Brand == a.Brand &&
+                              y.Version == data.Where(x => x.Audit_Kind == a.Audit_Kind && x.Audit_Type1 == a.Audit_Type1
+                              && x.Audit_Type2 == a.Audit_Type2 && x.Brand == a.Brand).OrderByDescending(x => x.Version).FirstOrDefault().Version)
                           .OrderByDescending(x => x.Audit_Type_ID).FirstOrDefault().Audit_Type_ID,
                               Audit_Kind = a.Audit_Kind,
-                              Audit_Type1 = a.Audit_Type_1,
-                              Audit_Type2 = a.Audit_Type_2,
-                              Version = data.Where(x => x.Audit_Kind == a.Audit_Kind && x.Audit_Type_1 == a.Audit_Type_1
-                              && x.Audit_Type_2 == a.Audit_Type_2 && x.Brand == a.Brand).OrderByDescending(x => x.Version).FirstOrDefault().Version
+                              Audit_Type1 = a.Audit_Type1,
+                              Audit_Type2 = a.Audit_Type2,
+                              Version = data.Where(x => x.Audit_Kind == a.Audit_Kind && x.Audit_Type1 == a.Audit_Type1
+                              && x.Audit_Type2 == a.Audit_Type2 && x.Brand == a.Brand).OrderByDescending(x => x.Version).FirstOrDefault().Version
                           }).ToList().Distinct();
             return result;
         }
@@ -156,8 +156,8 @@ namespace ME_API._Service.Service
             .Where(
                 x => x.Audit_Type_ID.Contains(text.ToString()) ||
                 x.Brand.Contains(text.ToString()) ||
-                x.Audit_Type_1.Contains(text.ToString()) ||
-                x.Audit_Type_2.Contains(text.ToString()) ||
+                x.Audit_Type1.Contains(text.ToString()) ||
+                x.Audit_Type2.Contains(text.ToString()) ||
                 x.Audit_Type2_Name.Contains(text.ToString()) ||
                 x.Updated_By.Contains(text.ToString())
             ).

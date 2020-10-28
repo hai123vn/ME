@@ -4,7 +4,8 @@ import { Brand } from '../_model/brand';
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { BehaviorSubject, Observable, } from 'rxjs';
 import { PaginationResult } from '../_model/pagination';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,10 @@ export class BrandService {
   currentBrand = this.brandSource.asObservable();
   flagSource = new BehaviorSubject<string>('0');
   currentFlag = this.flagSource.asObservable();
+  private _refreshNeeded = new Subject<void>();
 
   getBrands(page?, itemsPerPage?): Observable<PaginationResult<Brand[]>> {
-    
+
     const paginatedResult: PaginationResult<Brand[]> = new PaginationResult<Brand[]>();
 
     let params = new HttpParams();
@@ -40,6 +42,11 @@ export class BrandService {
         }),
       );
   }
+
+  get refreshNeeded() {
+    return this._refreshNeeded;
+  }
+
 
   search(page?, itemsPerPage?, text?): Observable<PaginationResult<Brand[]>> {
     const paginatedResult: PaginationResult<Brand[]> = new PaginationResult<Brand[]>();
@@ -66,7 +73,12 @@ export class BrandService {
 
   createBrand(brand: Brand) {
     // Tao moi Brand
-    return this.http.post(this.baseUrl + 'brand/create', brand);
+    return this.http.post(this.baseUrl + 'brand/create', brand).
+      pipe(
+        tap(() => {
+          this._refreshNeeded.next();
+        })
+      );
   }
   // lay tat ca danh sach Brand
   getAllBrands() {

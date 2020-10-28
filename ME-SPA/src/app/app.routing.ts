@@ -11,18 +11,19 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '',
+    path: "",
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: "Home"
     },
     children: [
       {
-        path: 'maintenance',
-        loadChildren: () => import('./views/maintenance/maintenance.module').then(
-          m => m.MaintenanceModule
-        )
-      }
+        path: "maintenance",
+        loadChildren: () =>
+          import("./views/maintenance/maintenance.module").then(
+            m => m.MaintenanceModule
+          )
+      },
     ]
   },
 ];

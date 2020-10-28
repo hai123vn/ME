@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, NgModel } from "@angular/forms";
+import { NgSelect2Module } from 'ng-select2';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { AuditTypeAddComponent } from './audit-type/audit-type-add/audit-type-add.component';
@@ -16,7 +17,8 @@ import { MaintenanceRoutingModule } from './maintenance-routing.module';
         CommonModule,
         FormsModule,
         NgxSpinnerModule,
-        PaginationModule.forRoot()
+        PaginationModule.forRoot(),
+        NgSelect2Module
     ],
     declarations: [
         BrandListComponent,

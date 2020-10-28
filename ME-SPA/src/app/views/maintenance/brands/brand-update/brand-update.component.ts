@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertifyService } from '../../../../_core/_service/alertify.service';
 import { BrandService } from '../../../../_core/_service/brand.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class BrandUpdateComponent implements OnInit {
   brand: any = {};
   flag = '0';
   constructor(
+    private alertify: AlertifyService,
     private brandService: BrandService,
     private router: Router
   ) { }
@@ -27,9 +29,9 @@ export class BrandUpdateComponent implements OnInit {
   update() {
     this.brandService.updateBrand(this.brand).subscribe(
       () => {
-        console.log(" Updated success !");
+        this.alertify.success(" Updated success !");
       }, error => {
-        console.log(error);
+        this.alertify.error(error);
       }
     )
   }

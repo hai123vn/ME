@@ -28,6 +28,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>Brand ID</th>
                   <th>Brand CN</th>
                   <th>Brand EN</th>
@@ -40,6 +41,7 @@
               </thead>
               <tbody *ngFor="let brand of brands; let i = index">
                 <tr>
+                  <td>{{ (pagination.currentPage - 1) * pagination.itemsPerPage + i + 1 }}</td>
                   <td>{{ brand.brand_ID }}</td>
                   <td>{{ brand.brand_ZW }}</td>
                   <td>{{ brand.brand_EN }}</td>

@@ -38,6 +38,13 @@ namespace ME_API.Controller
             var auditType = await _auditTypeService.GetAuditsByAuditType(formdata);
             return Ok(auditType);
         }
+        [HttpGet("search/{text}", Name = "SearchAuditType")]
+        public async Task<IActionResult> Search([FromQuery] PaginationParams param, string text)
+        {
+            var lists = await _auditTypeService.Search(param, text);
+            Response.AddPagination(lists.CurrentPage, lists.PageSize, lists.TotalCount, lists.TotalPages);
+            return Ok(lists);
+        }
 
         [HttpGet(Name = "GetAuditTypes")]
         public async Task<IActionResult> GetAuditTypes([FromQuery] PaginationParams param)
@@ -50,15 +57,15 @@ namespace ME_API.Controller
         [HttpPost("create")]
         public async Task<IActionResult> Create(AuditTypeDto auditTypeDto)
         {
-            // if (await _auditTypeService.CheckAuditTypeExists(auditTypeDto.Brand, auditTypeDto.Audit_Type_1, auditTypeDto.Audit_Type_2, auditTypeDto.Version))
-            //     return BadRequest("AuditType already exists!");
+            if (await _auditTypeService.CheckAuditTypeExists(auditTypeDto.Brand, auditTypeDto.Audit_Type1, auditTypeDto.Audit_Type2, auditTypeDto.Version))
+                return BadRequest("AuditType already exists!");
 
             // var username = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             // auditTypeDto.Updated_By = username;
             if (await _auditTypeService.Add(auditTypeDto))
             {
-                // return CreatedAtRoute("GetAuditTypes", new { });
-                return Ok();
+                return CreatedAtRoute("GetAuditTypes", new { });
+                // return Ok();
             }
 
             throw new Exception("Creating AuditType failed on save");
@@ -101,7 +108,7 @@ namespace ME_API.Controller
             return Ok(data);
         }
 
-        [HttpPost("update/{audit_Type_ID}")]
+        [HttpPost("upgrade/{audit_Type_ID}")]
         public async Task<IActionResult> Upgrade(string audit_Type_ID)
         {
             if (await _auditTypeService.Upgrade(audit_Type_ID))

@@ -71,17 +71,14 @@ export class BrandListComponent implements OnInit {
 
   searchBrand() {
     if (this.text !== '') {
-      this.searchKey = true;
       this.brandService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
         .subscribe((res: PaginationResult<Brand[]>) => {
           this.brands = res.result;
           this.pagination = res.pagination;
-          console.log('Search: ', this.brands);
         }, error => {
           this.alertify.error(error);
         });
     } else {
-      this.searchKey = false;
       this.loadBrand();
     }
   }
@@ -90,7 +87,7 @@ export class BrandListComponent implements OnInit {
     this.brand = {};
     this.brandService.changeBrand(this.brand);
     this.brandService.changeFlag('0');
-    this.router.navigate(['/maintenance/add']);
+    this.router.navigate(['/maintenance/brand/add']);
   }
 
   getAll() {
@@ -102,6 +99,6 @@ export class BrandListComponent implements OnInit {
   changeToEdit(brand: Brand) {
     this.brandService.changeBrand(brand);
     this.brandService.changeFlag('1');
-    this.router.navigate(['/maintenance/update']);
+    this.router.navigate(['/maintenance/brand/update']);
   }
 }

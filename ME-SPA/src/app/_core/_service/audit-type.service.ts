@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { AuditType } from '../_model/audit-type';
@@ -17,11 +17,15 @@ export class AuditTypeService {
   flagSource = new BehaviorSubject<string>('0');
   currentFlag = this.flagSource.asObservable();
   constructor(private http: HttpClient) { }
+  private _refresh = new Subject<void>();
+
 
   getListAll(page?, itemsPerPage?): Observable<PaginationResult<AuditType[]>> {
+
     const paginatedResult: PaginationResult<AuditType[]> = new PaginationResult<AuditType[]>();
 
     let params = new HttpParams();
+
 
     if (page != null && itemsPerPage != null) {
       params = params.append('pageNumer', page);
@@ -53,19 +57,23 @@ export class AuditTypeService {
           console.log(response);
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
-            paginatedResult.pagination =JSON.parse(response.headers.get('Pagination'));
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
           }
           return paginatedResult;
         }),
       );
   }
 
+  get refresh() {
+    return this._refresh;
+  }
+
   create(auditType: AuditType) {
     return this.http.post(this.baseUrl + 'auditType/create', auditType);
   }
 
-  upgrade(auditType: string) {
-    return this.http.post(this.baseUrl + 'auditType/upgrade', auditType);
+  upgrade(auditTypeID: string) {
+    return this.http.post(this.baseUrl + 'auditType/upgrade/', auditTypeID, {});
   }
 
   getAuditTypeVersion() {
@@ -90,11 +98,11 @@ export class AuditTypeService {
   }
 
   update(auditType: AuditType) {
-    return this.http.post(this.baseUrl + 'auditType/edit/', auditType);
+    return this.http.post(this.baseUrl + 'auditType/edit', auditType);
   }
 
   delete(id: string) {
-    return this.http.post(this.baseUrl + 'auditTyep/delete' + id, {});
+    return this.http.post(this.baseUrl + 'auditType/delete/' + id, {});
   }
 
   changeAuditType(auditType: AuditType) {

@@ -41,6 +41,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrandListResolver } from './_core/_resolver/brand-list.resolver';
+import { NgSelect2Module } from 'ng-select2';
+import { AuditTypeListResolver } from './_core/_resolver/audit-type-list.resolver';
 
 @NgModule({
   providers: [
@@ -50,6 +52,7 @@ import { BrandListResolver } from './_core/_resolver/brand-list.resolver';
     },
     BrandListResolver,
     AlertifyService,
+    AuditTypeListResolver,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { BrandListResolver } from './_core/_resolver/brand-list.resolver';
     CommonModule,
     FormsModule,
     NgxSpinnerModule,
+    NgSelect2Module,
   ],
   declarations: [
     AppComponent,

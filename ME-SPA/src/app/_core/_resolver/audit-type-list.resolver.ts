@@ -10,9 +10,10 @@ import { AuditTypeService } from '../_service/audit-type.service';
 @Injectable()
 export class AuditTypeListResolver implements Resolve<AuditType[]> {
     pageNumber = 1;
-    pageSize = 10;
+    pageSize = 5;
     constructor(private auditTypeService: AuditTypeService, private router: Router, private alertify: AlertifyService) { }
     resolve(route: ActivatedRouteSnapshot): Observable<AuditType[]> {
+        debugger
         return this.auditTypeService.getListAll(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
