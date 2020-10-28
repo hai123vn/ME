@@ -13,7 +13,6 @@ export class AuditTypeListResolver implements Resolve<AuditType[]> {
     pageSize = 5;
     constructor(private auditTypeService: AuditTypeService, private router: Router, private alertify: AlertifyService) { }
     resolve(route: ActivatedRouteSnapshot): Observable<AuditType[]> {
-        debugger
         return this.auditTypeService.getListAll(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');

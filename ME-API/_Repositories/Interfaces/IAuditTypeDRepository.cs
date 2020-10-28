@@ -1,8 +1,9 @@
+using ME_API.Data;
 using ME_API.Models;
 
 namespace ME_API._Repositories.Interfaces
 {
-    public interface IAuditTypeDRepository
+    public interface IAuditTypeDRepository : IMERepository<MES_Audit_Type_D>
     {
         string GetAuditItemLL(string auditTypeId, string auditItemId);
         string GetAuditItemEN(string auditTypeId, string auditItemId);
