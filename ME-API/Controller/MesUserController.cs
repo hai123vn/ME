@@ -46,9 +46,7 @@ namespace ME_API.Controller
         [HttpPost("saverole")]
         public async Task<bool> saveRole(List<AuditRoleSaveDto> auditRoleUser)
         {
-            // var userName = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            string userName;
-            userName = "SD3";
+            var userName = User.FindFirst(ClaimTypes.NameIdentifier).Value;   
             if (await _mesUserService.saveRole(auditRoleUser, userName))
             {
                 return true;

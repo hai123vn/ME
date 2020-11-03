@@ -78,7 +78,7 @@ namespace ME_API._Service.Service
                                      {
                                          user_account = a.user_account,
                                          role_unique = a.role_unique,
-                                         create_by = a.create_by,
+                                         create_by = userName,
                                          create_time = a.create_time
                                      }).ToList();
             var auditRole = _mapper.Map<List<MES_Audit_RoleUser>>(auditRoleSaveUser);

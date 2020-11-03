@@ -14,6 +14,7 @@ namespace ME_API.Helpers.AutoMapper
             CreateMap<AuditRoleUserDto, MES_Audit_RoleUser>();
             CreateMap<AuditRolesDto, MES_Audit_Roles>();
             CreateMap<UserForDetailDto, MES_User>();
+            CreateMap<AuditPicMDto, MES_Audit_PIC_M>();
         }
     }
 }

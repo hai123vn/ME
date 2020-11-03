@@ -71,6 +71,7 @@ namespace ME_API
             services.AddScoped<IMesUserRepository, MesUserRepository>();
             services.AddScoped<IAuditRolesRepository, AuditRolesRepository>();
             services.AddScoped<IAuditRoleUserRepository, AuditRoleUserRepository>();
+            services.AddScoped<IAuditPicMRepository, AuditPicMRepository>();
 
             //Services
             services.AddScoped<IAuthService, AuthService>();
@@ -78,6 +79,7 @@ namespace ME_API
             services.AddScoped<IAuditTypeService, AuditTypeService>();
             services.AddScoped<IAuditTypeDService, AuditTypeDService>();
             services.AddScoped<IMesUserService, MesUserService>();
+            services.AddScoped<IAuditPicMService, AuditPicMService>();
 
 
             // Swagger

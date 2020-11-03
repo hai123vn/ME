@@ -12,6 +12,7 @@ namespace ME_API.Data
         public DbSet<MES_User> MES_User { get; set; }
         public DbSet<MES_Audit_Roles> MES_Audit_Roles { get; set; }
         public DbSet<MES_Audit_RoleUser> MES_Audit_RoleUser { get; set; }
+        public DbSet<MES_Audit_PIC_M> MES_Audit_PIC_M {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +20,7 @@ namespace ME_API.Data
             modelBuilder.Entity<MES_Audit_Roles>().HasKey(x => new { x.role_unique });
             modelBuilder.Entity<MES_Audit_RoleUser>().HasKey(x => new { x.role_unique, x.user_account });
             modelBuilder.Entity<MES_User>().HasKey(x => new { x.Factory_ID, x.User_ID });
+            modelBuilder.Entity<MES_Audit_PIC_M>().HasKey(x=> new { x.PIC_Type_ID});
         }
     }
 }
