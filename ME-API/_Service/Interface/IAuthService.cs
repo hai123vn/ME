@@ -5,6 +5,6 @@ namespace ME_API._Service.Interface
 {
     public interface IAuthService
     {
-         Task<UserForLogged_Dto> GetUser(string username, string password);
+        Task<UserForLogged_Dto> GetUser(string username, string password);
     }
 }

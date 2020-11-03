@@ -38,7 +38,8 @@ export class AuditTypeListComponent implements OnInit {
     if (this.searchKey === false) {
       this.auditTypeService.getListAll(this.pagination.currentPage, this.pagination.itemsPerPage)
         .subscribe((res: PaginationResult<AuditType[]>) => {
-          this.auditType = res.result;
+          debugger
+          this.auditTypes = res.result;
           this.pagination = res.pagination;
         }, error => {
           this.alertify.error(error);
@@ -95,6 +96,7 @@ export class AuditTypeListComponent implements OnInit {
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
+    debugger
     this.load();
   }
 

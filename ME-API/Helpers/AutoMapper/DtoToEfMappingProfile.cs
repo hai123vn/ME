@@ -11,6 +11,9 @@ namespace ME_API.Helpers.AutoMapper
             CreateMap<BrandDto, MES_Audit_Brand>();
             CreateMap<AuditTypeDto, MES_Audit_Type_M>();
             CreateMap<AuditType_D_Dto, MES_Audit_Type_D>();
+            CreateMap<AuditRoleUserDto, MES_Audit_RoleUser>();
+            CreateMap<AuditRolesDto, MES_Audit_Roles>();
+            CreateMap<UserForDetailDto, MES_User>();
         }
     }
 }

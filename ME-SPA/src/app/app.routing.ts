@@ -3,12 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { LoginComponent } from './views/login/login.component';
+import { AuthGuard } from './_core/_guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     redirectTo: 'dashboard',
     pathMatch: 'full',
+  },
+  {
+    path: "login",
+    component: LoginComponent
   },
   {
     path: "",

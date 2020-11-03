@@ -47,7 +47,7 @@ namespace ME_API._Repositories.Repositories
 
         public MES_Audit_Type_D Get_Audit_Type_D(string ID, string item)
         {
-           return _context.MES_Audit_Type_D.Where(x=> x.Audit_Item_ID == ID && x.Audit_Item_ID == item).FirstOrDefault();
+           return _context.MES_Audit_Type_D.Where(x=> x.Audit_Type_ID == ID && x.Audit_Item_ID == item).FirstOrDefault();
         }
         
     }

@@ -26,40 +26,24 @@ export class AuditTypeAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.getAllBrands();
+    this.auditKinds = [
+      { id: 'SME', text: 'SME' },
+      { id: '6S', text: '6S' },
+      { id: 'WS', text: 'Water Spider' }
+    ];
     this.auditTypeService.refresh.subscribe(() => {
       this.auditTypeService.currentAuditType.subscribe(
         (auditType) => (this.auditType = auditType)
       );
       this.auditTypeService.currentFlag.subscribe((flag) => (this.flag = flag));
-      this.getAllBrands();
       if (this.flag == "0") {
         this.auditType.version = 1;
       }
-
-      this.auditKinds = [
-        {id:'SME', text:'SME'},
-        {id: '6S', text:'6S'},
-        {id: 'WS', text:'Water Spider'}
-      ];
     });
   }
 
-  saveAndNext() {
-    if (this.flag == "0") {
-      this.auditTypeService.create(this.auditType).subscribe(() => {
-        this.alertify.success("Add succed");
-        this.auditType = {};
-        this.auditType.version = 1;
-      }, error => {
-        this.alertify.error(error);
-      });
-    } else {
-      this.auditTypeService.update(this.auditType).subscribe(() => {
-        this.alertify.success("Update succed");
-        this.router.navigate(["/maintenance/audit-type"]);
-      });
-    }
-  }
   blackList() {
     this.router.navigate(["/maintenance/audit-type"]);
   }
@@ -68,21 +52,17 @@ export class AuditTypeAddComponent implements OnInit {
       this.auditTypeService.create(this.auditType).subscribe(() => {
         this.alertify.success("Create success");
         this.router.navigate(["/maintenance/audit-type"]);
-      });
-    } else {
-      this.auditTypeService.update(this.auditType).subscribe(() => {
-        this.alertify.success("Updated success");
-        this.router.navigate(["/maintenance/audit-type"]);
       }, error => {
-        this.alertify.error("Delete failed");
+        this.alertify.error(error);
       });
     }
   }
 
   getAllBrands() {
+    debugger
     this.brandService.getAllBrands().subscribe((data) => {
       this.brands = data.map(item => {
-        return { id: item.brand_ID, text: item.brand_ID + ' - ' + item.brand_EN };
+        return { id: item.brand_ID, text: item.brand_ID };
       });
     }, error => {
       this.alertify.error(error);

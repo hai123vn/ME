@@ -4,10 +4,9 @@
       <div class="card">
         <div class="card-header">
           <strong *ngIf="!auditType.audit_Type_ID; else elseBlock"
-            >Add new</strong
+            >Add Audit Type</strong
           >
           <ng-template #elseBlock><strong>Update</strong></ng-template>
-          audit type
           <button
             type="button"
             class="btn btn-sm btn-primary float-right"
@@ -19,7 +18,6 @@
         <form
           class="form-horizontal"
           #addAuditTypeForm="ngForm"
-          (ngSubmit)="addAuditTypeForm.valid && saveAndNext()"
         >
           <div class="card-body">
             <div class="form-group row">
@@ -41,7 +39,7 @@
                 <ng-select2
                   [data]="brands"
                   width="100%"
-                  [(ngModel)]="auditType.brands"
+                  [(ngModel)]="auditType.brand"
                   name="brand"
                 >
                 </ng-select2>

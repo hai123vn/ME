@@ -14,9 +14,16 @@ namespace ME_API.Data
 
         }
 
-        public Task<MES_User> Login(string username, string password)
+        public async Task<MES_User> Login(string username, string password)
         {
-            throw new System.NotImplementedException();
+            var user = await _context.MES_User.FirstOrDefaultAsync(x => x.User_ID == username);
+            if (user == null)
+                return null;
+
+            if (user.Password != password)
+                return null;
+            else
+                return user;
         }
     }
 }

@@ -4,12 +4,15 @@ using System.Threading.Tasks;
 using ME_API._Service.Interface;
 using ME_API.DTO;
 using ME_API.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ME_API.Controller
 {
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
+    
     public class BrandController : ControllerBase
     {
         private readonly IBrandService _brandService;

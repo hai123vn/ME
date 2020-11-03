@@ -64,14 +64,21 @@ namespace ME_API
                });
 
             //Repository
+            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IAuditTypeRepository, AuditTypeRepository>();
             services.AddScoped<IAuditTypeDRepository, AuditTypeDRepository>();
+            services.AddScoped<IMesUserRepository, MesUserRepository>();
+            services.AddScoped<IAuditRolesRepository, AuditRolesRepository>();
+            services.AddScoped<IAuditRoleUserRepository, AuditRoleUserRepository>();
 
             //Services
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IAuditTypeService, AuditTypeService>();
-            
+            services.AddScoped<IAuditTypeDService, AuditTypeDService>();
+            services.AddScoped<IMesUserService, MesUserService>();
+
 
             // Swagger
             services.AddSwaggerGen(c =>
@@ -98,7 +105,7 @@ namespace ME_API
                         }
                     });
             });
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

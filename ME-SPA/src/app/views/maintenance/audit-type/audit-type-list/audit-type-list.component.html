@@ -6,7 +6,9 @@
       <div class="card">
         <div class="card-header">
           <i class="fa fa-align-justify"></i> List Audit Types
-          <input
+          <div class="row">
+            <div class="col-4 offset-2">
+              <input
             type="text"
             name="search"
             id="search"
@@ -15,13 +17,18 @@
             placeholder="Search"
             (keyup)="search()"
           />
-          <button
-            type="button"
-            class="btn btn-sm btn-primary float-right"
-            (click)="add()"
-          >
-            <i class="fa fa-plus"></i> Add new
-          </button>
+            </div>
+            <div class="col-6">
+              <button
+              type="button"
+              class="btn btn-sm btn-primary float-right"
+              (click)="add()"
+            >
+              <i class="fa fa-plus"></i> Add new
+            </button>
+            </div>
+          </div>
+          
         </div>
         <div class="card-body">
           <ngx-spinner

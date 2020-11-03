@@ -28,7 +28,7 @@ export class AuditTypeService {
 
 
     if (page != null && itemsPerPage != null) {
-      params = params.append('pageNumer', page);
+      params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
     return this.http.get<AuditType[]>(this.baseUrl + 'auditType', { observe: 'response', params })

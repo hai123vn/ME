@@ -18,6 +18,11 @@ import { AppComponent } from './app.component';
 import { DefaultLayoutComponent } from './containers';
 import { AlertifyService } from './_core/_service/alertify.service';
 
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
@@ -43,6 +48,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrandListResolver } from './_core/_resolver/brand-list.resolver';
 import { NgSelect2Module } from 'ng-select2';
 import { AuditTypeListResolver } from './_core/_resolver/audit-type-list.resolver';
+import { AuditTypeDListResolver } from './_core/_resolver/audit-type-d-list.resolver';
+import { JwtModule } from '@auth0/angular-jwt';
+import { LoginComponent } from './views/login/login.component';
+import { AuthService } from './_core/_service/auth.service';
+import { AuthGuard } from './_core/_guards/auth.guard';
 
 @NgModule({
   providers: [
@@ -53,6 +63,9 @@ import { AuditTypeListResolver } from './_core/_resolver/audit-type-list.resolve
     BrandListResolver,
     AlertifyService,
     AuditTypeListResolver,
+    AuditTypeDListResolver,
+    AuthService,
+    AuthGuard
   ],
   imports: [
     BrowserModule,
@@ -72,9 +85,17 @@ import { AuditTypeListResolver } from './_core/_resolver/audit-type-list.resolve
     FormsModule,
     NgxSpinnerModule,
     NgSelect2Module,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:5002"], 
+        disallowedRoutes: ["localhost: 5002/api/auth"]
+      }
+    })
   ],
   declarations: [
     AppComponent,
+    LoginComponent,
     ...APP_CONTAINERS
   ],
 

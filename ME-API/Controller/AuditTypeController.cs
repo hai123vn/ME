@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ME_API.Controller
 {
+    
     [ApiController]
     [Route("api/[controller]")]
     public class AuditTypeController : ControllerBase

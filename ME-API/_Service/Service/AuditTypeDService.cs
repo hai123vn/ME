@@ -36,14 +36,22 @@ namespace ME_API._Service.Service
         {
             var auditType = _mapper.Map<MES_Audit_Type_D>(model);
             _repoauditTypeD.Add(auditType);
-            return await _repoauditTypeD.SaveAll();
+            try
+            {
+                return await _repoauditTypeD.SaveAll();
+            }
+            catch (System.Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
 
-        public async Task<bool> ChangeVisiable(string ID, string item)
+        public async Task<bool> Update(AuditType_D_Dto model)
         {
-            var model = _repoauditTypeD.Get_Audit_Type_D(ID, item);
-            model.Visible = !model.Visible;
-            var modelRepo = _mapper.Map<MES_Audit_Type_D>(model);
+            var auditType = _mapper.Map<MES_Audit_Type_D>(model);
+            auditType.Updated_Time = DateTime.Now;
             return await _repoauditTypeD.SaveAll();
         }
 
@@ -51,6 +59,15 @@ namespace ME_API._Service.Service
         {
             var model = _repoauditTypeD.FindById(id);
             _repoauditTypeD.Remove(model);
+            return await _repoauditTypeD.SaveAll();
+        }
+
+
+        public async Task<bool> ChangeVisiable(string ID, string item)
+        {
+            var model = _repoauditTypeD.Get_Audit_Type_D(ID, item);
+            model.Visible = !model.Visible;
+            var modelRepo = _mapper.Map<MES_Audit_Type_D>(model);
             return await _repoauditTypeD.SaveAll();
         }
 
@@ -76,7 +93,7 @@ namespace ME_API._Service.Service
                            Audit_Kind = a.Audit_Kind == null ? "" : a.Audit_Kind,
                            Audit_Type1 = a.Audit_Type1 == null ? "" : a.Audit_Type1,
                            Audit_Type2 = a.Audit_Type2 == null ? "" : a.Audit_Type2,
-                           Version = result.Where(x => x.Audit_Kind == a.Audit_Kind && x.Audit_Type1 == a.Audit_Type1 
+                           Version = result.Where(x => x.Audit_Kind == a.Audit_Kind && x.Audit_Type1 == a.Audit_Type1
                            && x.Audit_Type2 == a.Audit_Type2 && x.Brand == a.Brand).OrderByDescending(x => x.Version).FirstOrDefault().Version
                        };
             return data.Distinct();
@@ -155,14 +172,29 @@ namespace ME_API._Service.Service
         }
 
 
-        public async Task<PagedList<AuditType_D_Dto>> SearchByAuditType(PaginationParams param, string audit_Type1, string audit_Type2)
+        public async Task<PagedList<AuditType_D_Dto>> SearchByAuditType(PaginationParams param, string audit_Type_ID, string audit_Item_ID)
         {
-           return null;
+            var lists = _repoauditTypeD.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper);
+            if (audit_Type_ID != "all")
+            {
+                if (audit_Item_ID != null)
+                {
+                    lists = lists.Where(x => x.Audit_Type_ID.Trim() == audit_Type_ID && x.Audit_Item_ID == audit_Item_ID);
+
+                }
+                else
+                {
+                    lists = lists.Where(x => x.Audit_Type_ID.Trim() == audit_Type_ID);
+                }
+            }
+            return await PagedList<AuditType_D_Dto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
 
-        public Task<bool> Update(AuditType_D_Dto model)
+        public async Task<bool> DeteleD(string id1, string id2)
         {
-            throw new System.NotImplementedException();
+            var model = _repoauditTypeD.FindAll(x => x.Audit_Type_ID == id1 && x.Audit_Item_ID == id2).FirstOrDefault();
+            _repoauditTypeD.Remove(model);
+            return await _repoauditTypeD.SaveAll();
         }
     }
 }

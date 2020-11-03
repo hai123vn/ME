@@ -34,13 +34,14 @@ export class BrandListComponent implements OnInit {
   }
 
   deleteBrand(brand: Brand) {
-    this.brandService.deleteBrand(brand.brand_ID).subscribe(
-      () => {
-        this.alertify.success("Deleted success");
+    this.alertify.confirm('Delete Audit Type', 'Are you sure you want to delete this Audit_Type_ID "' + brand.brand_ID + '" ? ', () => {
+      this.brandService.deleteBrand(brand.brand_ID).subscribe(() => {
+        this.alertify.success('Brand has been deleted');
+        this.loadBrand();
       }, error => {
-        this.alertify.error(error);
-      }
-    )
+        this.alertify.error('Failed to delete the Audit Type');
+      });
+    });
   }
 
   pageChanged(event: any): void {

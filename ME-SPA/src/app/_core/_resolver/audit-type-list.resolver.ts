@@ -5,6 +5,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { catchError } from 'rxjs/operators';
 import { AuditType } from '../_model/audit-type';
 import { AlertifyService } from '../_service/alertify.service';
+import { AuditTypeDService } from '../_service/audit-type-d.service';
 import { AuditTypeService } from '../_service/audit-type.service';
 
 @Injectable()

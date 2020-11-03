@@ -55,9 +55,19 @@ namespace ME_API.Data
             return _context.Set<T>().Find(id);
         }
 
+        public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        {
+            return FindAll(includeProperties).SingleOrDefault(predicate);
+        }
+
         public void Remove(T entity)
         {
             _context.Set<T>().Remove(entity);
+        }
+
+        public void RemoveMultiple(List<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
         }
 
         public async Task<bool> SaveAll()

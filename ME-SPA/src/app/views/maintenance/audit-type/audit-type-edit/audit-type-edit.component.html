@@ -1,3 +1,136 @@
-<p>
-  audit-type-edit works!
-</p>
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong *ngIf="!auditType.audit_Type_ID; else elseBlock"
+            >Edit Audit Type</strong
+          >
+          <ng-template #elseBlock><strong>Update</strong></ng-template>
+          <button
+            type="button"
+            class="btn btn-sm btn-primary float-right"
+            (click)="blackList()"
+          >
+            <i class="fa fa-chevron-left"></i> Back
+          </button>
+        </div>
+        <form class="form-horizontal" #addAuditTypeForm="ngForm">
+          <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-1 col-form-label" for="audit_Type_ID">
+                Audit Type ID
+              </label>
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  [(ngModel)]="auditType.audit_Type_ID"
+                  name="audit_Type_ID"
+                  class="form-control"
+                  required
+                  disabled
+                />
+              </div>
+              <label class="col-md-1 col-form-label" for="brand">Brand</label>
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  [(ngModel)]="auditType.brand"
+                  name="brand"
+                  class="form-control"
+                  required
+                  disabled
+                />
+              </div>
+              <label class="col-md-1 col-form-label" for="status">Status</label>
+              <div class="col-md-3">
+                <select
+                  class="form-control"
+                  id="status"
+                  [(ngModel)]="auditType.status"
+                  name="status"
+                >
+                  <option value="1">Valid</option>
+                  <option value="0">Invalid</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-1 col-form-label" for="audit_Type1"
+                >Audit Type</label
+              >
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  [(ngModel)]="auditType.audit_Type1"
+                  name="audit_Type1"
+                  class="form-control"
+                  placeholder="Enter audit type .."
+                />
+              </div>
+              <label class="col-md-1 col-form-label" for="audit_Type2"
+                >Audit Item</label
+              >
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  [(ngModel)]="auditType.audit_Type2"
+                  name="audit_Type2"
+                  class="form-control"
+                  placeholder="Enter Audit Item.."
+                />
+              </div>
+              <label class="col-md-1 col-form-label" for="audit_Type2_Name"
+                >Audit Title</label
+              >
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  [(ngModel)]="auditType.audit_Type2_Name"
+                  name="audit_Type2_Name"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-1 col-form-label" for="version"
+                >Version</label
+              >
+              <div class="col-md-3">
+                <input
+                  type="number"
+                  [(ngModel)]="auditType.version"
+                  name="version"
+                  class="form-control"
+                />
+              </div>
+              <label class="col-md-1 col-form-label" for="brand"
+                >Audit Kind</label
+              >
+              <div class="col-md-3">
+                <input
+                  [(ngModel)]="auditType.audit_Kind"
+                  name="audit_Kind"
+                  class="form-control"
+                  required
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button
+              type="button"
+              class="btn btn-sm btn-success"
+              [disabled]="!addAuditTypeForm.valid"
+              (click)="update()"
+            >
+              <i class="fa fa-check"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

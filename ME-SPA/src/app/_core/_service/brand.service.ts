@@ -73,12 +73,7 @@ export class BrandService {
 
   createBrand(brand: Brand) {
     // Tao moi Brand
-    return this.http.post(this.baseUrl + 'brand/create', brand).
-      pipe(
-        tap(() => {
-          this._refreshNeeded.next();
-        })
-      );
+    return this.http.post(this.baseUrl + 'brand/create', brand);
   }
   // lay tat ca danh sach Brand
   getAllBrands() {

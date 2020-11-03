@@ -1,4 +1,8 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthGuard } from '../../_core/_guards/auth.guard';
+import { AlertifyService } from '../../_core/_service/alertify.service';
+import { AuthService } from '../../_core/_service/auth.service';
 import { navItems } from '../../_nav';
 
 @Component({
@@ -8,8 +12,27 @@ import { navItems } from '../../_nav';
 export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
+  currentUser: any = JSON.parse(localStorage.getItem('user'));
 
+
+  constructor(
+    private authService: AuthService,
+    private alertify: AlertifyService,
+    private router: Router,
+  ) {
+
+  }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decodedToken = null;
+    this.authService.currentUser = null;
+    this.alertify.message('Logged out');
+    this.router.navigate(['/login']);
+  }
+
 }
