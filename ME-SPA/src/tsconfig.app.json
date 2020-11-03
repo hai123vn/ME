@@ -13,7 +13,8 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": false
+    "enableIvy": false,
+    "types" : ["node"]
   },
   "files": [
     "main.ts",

@@ -44,11 +44,10 @@ namespace ME_API.Controller
         [HttpPost("create")]
         public async Task<IActionResult> Create(AuditPicMDto auditPicM)
         {
-            // var userName = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            auditPicM.Updated_By = "SD3" ;
-            if (await _auditPicMService.Add(auditPicM)) 
+            var userName = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (await _auditPicMService.Add(auditPicM))
             {
-                return CreatedAtRoute("GetAuditPicMs", new {});
+                return CreatedAtRoute("GetAuditPicMs", new { });
             }
             throw new Exception("Creating the Audit PicM failed on save");
         }

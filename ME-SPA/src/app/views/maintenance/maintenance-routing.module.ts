@@ -1,8 +1,13 @@
 import { Component, NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from "@angular/router";
+import { AuditPicMListResolver } from '../../_core/_resolver/audit-pic-m-list.resolver';
 import { AuditTypeDListResolver } from '../../_core/_resolver/audit-type-d-list.resolver';
 import { AuditTypeListResolver } from '../../_core/_resolver/audit-type-list.resolver';
 import { BrandListResolver } from '../../_core/_resolver/brand-list.resolver';
+import { AuditPicMService } from '../../_core/_service/audit-pic-m.service';
+import { AuditPicMAddComponent } from './audit-pic-m/audit-pic-m-add/audit-pic-m-add.component';
+import { AuditPicMListComponent } from './audit-pic-m/audit-pic-m-list/audit-pic-m-list.component';
+import { AuditPicMUpdateComponent } from './audit-pic-m/audit-pic-m-update/audit-pic-m-update.component';
 import { AuditTypeDAddComponent } from './audit-type-d/audit-type-d-add/audit-type-d-add.component';
 import { AuditTypeDListComponent } from './audit-type-d/audit-type-d-list/audit-type-d-list.component';
 import { AuditTypeDUpdateComponent } from './audit-type-d/audit-type-d-update/audit-type-d-update.component';
@@ -111,6 +116,33 @@ const routes: Routes = [
                         component: UserListComponent,
                         data: {
                             title: 'User'
+                        }
+                    }
+                ]
+            },
+            {
+                path:'audit-pic-m',
+                children: [
+                    {
+                        path:'',
+                        component: AuditPicMListComponent,
+                        resolve: { picms: AuditPicMListResolver },
+                        data: {
+                            title: 'Audit Pic M'
+                        }
+                    },
+                    {
+                        path:'add',
+                        component: AuditPicMAddComponent,
+                        data: {
+                            title: 'Add Audit Pic M'
+                        }
+                    },
+                    {
+                        path:'update',
+                        component: AuditPicMUpdateComponent,
+                        data: {
+                            title: 'Update Audit Pic M'
                         }
                     }
                 ]

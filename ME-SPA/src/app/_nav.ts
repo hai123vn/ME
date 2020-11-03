@@ -30,5 +30,10 @@ export const navItems: INavData[] = [
     url: '/maintenance/audit-type-d',
     icon: 'icon-list'
   },
+  {
+    name: 'Audit Pic M',
+    url: '/maintenance/audit-pic-m',
+    icon: 'icon-list'
+  },
  
 ];
