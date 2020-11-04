@@ -16,6 +16,7 @@ export class AuditTypeDListResolver implements Resolve<AuditType[]> {
     resolve(route: ActivatedRouteSnapshot): Observable<AuditType[]> {
         return this.auditTypeDService.getAll(this.pageNumber, this.pageSize).pipe(
             catchError(error => {
+
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/dashboard']);
                 return of(null);

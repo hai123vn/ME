@@ -53,6 +53,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './views/login/login.component';
 import { AuthService } from './_core/_service/auth.service';
 import { AuthGuard } from './_core/_guards/auth.guard';
+import { AuditPicMListResolver } from './_core/_resolver/audit-pic-m-list.resolver';
 
 @NgModule({
   providers: [
@@ -64,6 +65,7 @@ import { AuthGuard } from './_core/_guards/auth.guard';
     AlertifyService,
     AuditTypeListResolver,
     AuditTypeDListResolver,
+    AuditPicMListResolver,
     AuthService,
     AuthGuard
   ],

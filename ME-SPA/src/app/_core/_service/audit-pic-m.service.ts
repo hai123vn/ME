@@ -26,12 +26,12 @@ export class AuditPicMService {
 
   getListAll(page?, itemPerPage?): Observable<PaginationResult<AuditPicM[]>> {
     const paginatedResult: PaginationResult<AuditPicM[]> = new PaginationResult<AuditPicM[]>();
-    let param = new HttpParams;
+    let params = new HttpParams;
     if (page != null && itemPerPage != null) {
-      param = param.append('pageNumber', page);
-      param = param.append('pageSize', itemPerPage);
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemPerPage);
     }
-    return this.http.get<AuditPicM[]>(this.baseUrl + 'auditPicM', { observe: 'response' })
+    return this.http.get<AuditPicM[]>(this.baseUrl + 'auditPicM/GetAllPicMs', { observe: 'response' , params})
       .pipe(
         map(response => {
           paginatedResult.result = response.body;
@@ -76,7 +76,7 @@ export class AuditPicMService {
 
   update(auditPicM : AuditPicM)
   {
-    return this.http.post(this.baseUrl + 'auditPicM/update', auditPicM);
+    return this.http.post(this.baseUrl + 'auditPicM/edit', auditPicM);
   }
 
   getAll():Observable<AuditPicM[]> {

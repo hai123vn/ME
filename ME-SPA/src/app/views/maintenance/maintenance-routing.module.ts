@@ -96,23 +96,23 @@ const routes: Routes = [
                         path: 'add',
                         component: AuditTypeDAddComponent,
                         data: {
-                            title: 'Add Audit Type D' 
+                            title: 'Add Audit Type D'
                         }
                     },
                     {
                         path: 'update',
                         component: AuditTypeDUpdateComponent,
                         data: {
-                            title: 'Update Audit Type D' 
+                            title: 'Update Audit Type D'
                         }
                     }
                 ]
             },
             {
-                path:'user',
+                path: 'user',
                 children: [
                     {
-                        path:'',
+                        path: '',
                         component: UserListComponent,
                         data: {
                             title: 'User'
@@ -121,25 +121,25 @@ const routes: Routes = [
                 ]
             },
             {
-                path:'audit-pic-m',
+                path: 'audit-pic-m',
                 children: [
                     {
-                        path:'',
+                        path: '',
                         component: AuditPicMListComponent,
-                        resolve: { picms: AuditPicMListResolver },
+                        resolve: { auditPics: AuditPicMListResolver },
                         data: {
                             title: 'Audit Pic M'
                         }
                     },
                     {
-                        path:'add',
+                        path: 'add',
                         component: AuditPicMAddComponent,
                         data: {
                             title: 'Add Audit Pic M'
                         }
                     },
                     {
-                        path:'update',
+                        path: 'update',
                         component: AuditPicMUpdateComponent,
                         data: {
                             title: 'Update Audit Pic M'

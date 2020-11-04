@@ -45,9 +45,10 @@ namespace ME_API.Controller
         public async Task<IActionResult> Create(AuditPicMDto auditPicM)
         {
             var userName = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            auditPicM.Updated_By = userName;
             if (await _auditPicMService.Add(auditPicM))
             {
-                return CreatedAtRoute("GetAuditPicMs", new { });
+                return Ok();
             }
             throw new Exception("Creating the Audit PicM failed on save");
         }

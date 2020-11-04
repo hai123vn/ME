@@ -28,12 +28,12 @@ export const navItems: INavData[] = [
   {
     name: 'Audit Type D',
     url: '/maintenance/audit-type-d',
-    icon: 'icon-list'
+    icon: 'icon-screen-tablet'
   },
   {
     name: 'Audit Pic M',
     url: '/maintenance/audit-pic-m',
-    icon: 'icon-list'
+    icon: 'icon-notebook'
   },
  
 ];

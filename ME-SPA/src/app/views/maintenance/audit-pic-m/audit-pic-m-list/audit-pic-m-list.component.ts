@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuditPicM } from '../../../../_core/_model/audit-pic-m';
 import { Pagination, PaginationResult } from '../../../../_core/_model/pagination';
 import { User } from '../../../../_core/_model/user';
@@ -16,6 +17,12 @@ export class AuditPicMListComponent implements OnInit {
   auditPics: AuditPicM[];
   auditPic: any = {};
   user: User = JSON.parse(localStorage.getItem('user'));
+  // pagination: Pagination = {
+  //   currentPage: 1,
+  //   itemsPerPage: 5,
+  //   totalItems: 1,
+  //   totalPages: 1
+  // };
   pagination: Pagination;
   searchKey = false;
   text: string;
@@ -23,10 +30,18 @@ export class AuditPicMListComponent implements OnInit {
   constructor(private http: HttpClient,
     private auditPicMService: AuditPicMService,
     private alertify: AlertifyService,
+    private route: ActivatedRoute,
     private router: Router,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    // this.load();
+    this.auditPicMService.currentAuditPicM.subscribe(auditPic => this.auditPic = auditPic);
+    this.route.data.subscribe(data =>{
+      console.log(data);
+      this.auditPics = data['auditPics'].result;
+      this.pagination = data['auditPics'].pagination;
+    });
   }
 
   load() {
