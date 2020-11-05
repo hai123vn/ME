@@ -48,7 +48,7 @@ namespace ME_API.Controller
             auditPicM.Updated_By = userName;
             if (await _auditPicMService.Add(auditPicM))
             {
-                return Ok();
+                return CreatedAtRoute("GetAuditPicMs", new { });
             }
             throw new Exception("Creating the Audit PicM failed on save");
         }

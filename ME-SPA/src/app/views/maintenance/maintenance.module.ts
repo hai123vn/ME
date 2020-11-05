@@ -5,6 +5,9 @@ import { NgSelect2Module } from 'ng-select2';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { AuditPicDAddComponent } from './audit-pic-d/audit-pic-d-add/audit-pic-d-add.component';
+import { AuditPicDListComponent } from './audit-pic-d/audit-pic-d-list/audit-pic-d-list.component';
+import { AuditPicDUpdateComponent } from './audit-pic-d/audit-pic-d-update/audit-pic-d-update.component';
 import { AuditPicMAddComponent } from './audit-pic-m/audit-pic-m-add/audit-pic-m-add.component';
 import { AuditPicMListComponent } from './audit-pic-m/audit-pic-m-list/audit-pic-m-list.component';
 import { AuditPicMUpdateComponent } from './audit-pic-m/audit-pic-m-update/audit-pic-m-update.component';
@@ -44,6 +47,9 @@ import { UserListComponent } from './user/user-list/user-list.component';
         AuditPicMListComponent,
         AuditPicMAddComponent,
         AuditPicMUpdateComponent,
+        AuditPicDListComponent,
+        AuditPicDAddComponent,
+        AuditPicDUpdateComponent,
     ],
     providers: [
         NgxSpinnerService,

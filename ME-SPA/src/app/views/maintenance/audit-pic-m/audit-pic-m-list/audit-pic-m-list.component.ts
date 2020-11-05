@@ -51,7 +51,7 @@ export class AuditPicMListComponent implements OnInit {
           this.auditPics = res.result;
           this.pagination = res.pagination;
         }, error => {
-          this.alertify.error(error);
+          this.alertify.error("Erro3r !!!");
         });
     } else {
       this.auditPicMService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
@@ -59,7 +59,7 @@ export class AuditPicMListComponent implements OnInit {
           this.auditPics = res.result;
           this.pagination = res.pagination;
         }, error => {
-          this.alertify.error(error);
+          this.alertify.error("Erro2r !!!");
         });
     }
   }
@@ -90,14 +90,16 @@ export class AuditPicMListComponent implements OnInit {
   }
 
   search() {
-    if (this.text != null) {
+    if (this.text !== '') {
+      debugger
       this.searchKey = true;
       this.auditPicMService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
         .subscribe((res: PaginationResult<AuditPicM[]>) => {
+          debugger
           this.auditPics = res.result;
           this.pagination = res.pagination;
         }, error => {
-          this.alertify.error(error);
+          this.alertify.error("Search not found !!!");
         });
     } else {
       this.searchKey = false;

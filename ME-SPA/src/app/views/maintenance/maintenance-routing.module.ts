@@ -1,10 +1,14 @@
 import { Component, NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from "@angular/router";
+import { AuditPicDListResolver } from '../../_core/_resolver/audit-pic-d-list.resolver';
 import { AuditPicMListResolver } from '../../_core/_resolver/audit-pic-m-list.resolver';
 import { AuditTypeDListResolver } from '../../_core/_resolver/audit-type-d-list.resolver';
 import { AuditTypeListResolver } from '../../_core/_resolver/audit-type-list.resolver';
 import { BrandListResolver } from '../../_core/_resolver/brand-list.resolver';
 import { AuditPicMService } from '../../_core/_service/audit-pic-m.service';
+import { AuditPicDAddComponent } from './audit-pic-d/audit-pic-d-add/audit-pic-d-add.component';
+import { AuditPicDListComponent } from './audit-pic-d/audit-pic-d-list/audit-pic-d-list.component';
+import { AuditPicDUpdateComponent } from './audit-pic-d/audit-pic-d-update/audit-pic-d-update.component';
 import { AuditPicMAddComponent } from './audit-pic-m/audit-pic-m-add/audit-pic-m-add.component';
 import { AuditPicMListComponent } from './audit-pic-m/audit-pic-m-list/audit-pic-m-list.component';
 import { AuditPicMUpdateComponent } from './audit-pic-m/audit-pic-m-update/audit-pic-m-update.component';
@@ -147,6 +151,33 @@ const routes: Routes = [
                     }
                 ]
             },
+            {
+                path: 'audit-pic-d',
+                children: [
+                    {
+                        path: '',
+                        component: AuditPicDListComponent,
+                        resolve: { auditPicDs : AuditPicDListResolver},
+                        data: {
+                            title: 'Audit Pic D'
+                        }
+                    },
+                    {
+                        path: 'add',
+                        component: AuditPicDAddComponent,
+                        data: {
+                            title: 'Add Audit Pic D'
+                        }
+                    },
+                    {
+                        path: 'update',
+                        component: AuditPicDUpdateComponent,
+                        data: {
+                            title: 'Update Audit Pic D'
+                        }
+                    }
+                ]
+            }
         ]
     }
 ];

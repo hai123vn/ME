@@ -54,6 +54,7 @@ import { LoginComponent } from './views/login/login.component';
 import { AuthService } from './_core/_service/auth.service';
 import { AuthGuard } from './_core/_guards/auth.guard';
 import { AuditPicMListResolver } from './_core/_resolver/audit-pic-m-list.resolver';
+import { AuditPicDListResolver } from './_core/_resolver/audit-pic-d-list.resolver';
 
 @NgModule({
   providers: [
@@ -66,6 +67,7 @@ import { AuditPicMListResolver } from './_core/_resolver/audit-pic-m-list.resolv
     AuditTypeListResolver,
     AuditTypeDListResolver,
     AuditPicMListResolver,
+    AuditPicDListResolver,
     AuthService,
     AuthGuard
   ],

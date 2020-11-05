@@ -35,5 +35,10 @@ export const navItems: INavData[] = [
     url: '/maintenance/audit-pic-m',
     icon: 'icon-notebook'
   },
+  {
+    name: 'Audit Pic D',
+    url: '/maintenance/audit-pic-d',
+    icon: 'icon-notebook'
+  },
  
 ];
