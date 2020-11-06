@@ -10,7 +10,7 @@ export const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {

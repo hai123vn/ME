@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../../_core/_guards/auth.guard';
+import { User } from '../../_core/_model/user';
 import { AlertifyService } from '../../_core/_service/alertify.service';
 import { AuthService } from '../../_core/_service/auth.service';
 import { navItems } from '../../_nav';
@@ -12,7 +13,7 @@ import { navItems } from '../../_nav';
 export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
-  currentUser: any = JSON.parse(localStorage.getItem('user'));
+  currentUser: User = JSON.parse(localStorage.getItem('user'));
 
 
   constructor(
@@ -27,6 +28,7 @@ export class DefaultLayoutComponent {
   }
 
   logout() {
+    debugger
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.authService.decodedToken = null;
