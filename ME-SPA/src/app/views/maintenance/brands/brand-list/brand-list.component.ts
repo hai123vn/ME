@@ -71,6 +71,7 @@ export class BrandListComponent implements OnInit {
   }
 
   searchBrand() {
+    this.pagination.currentPage = 1;
     if (this.text !== '') {
       this.brandService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
         .subscribe((res: PaginationResult<Brand[]>) => {

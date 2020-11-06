@@ -17,6 +17,9 @@ namespace ME_API.Helpers.AutoMapper
             CreateMap<AuditPicMDto, MES_Audit_PIC_M>();
             CreateMap<AuditPicDDto, MES_Audit_PIC_D>();
             CreateMap<MesOrgDto, MES_Org>();
+            CreateMap<AuditRecMDto, MES_Audit_Rec_M>();
+            CreateMap<AuditRecMDto, MES_Audit_Rec_D>();
+            
         }
     }
 }

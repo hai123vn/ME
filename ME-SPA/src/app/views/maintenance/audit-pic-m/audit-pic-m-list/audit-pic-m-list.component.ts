@@ -90,6 +90,7 @@ export class AuditPicMListComponent implements OnInit {
   }
 
   search() {
+    this.pagination.currentPage = 1;
     if (this.text !== '') {
       debugger
       this.searchKey = true;

@@ -49,6 +49,7 @@
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
+    "eslint": "^7.12.1",
     "exceljs": "^4.2.0",
     "file-saver": "^2.0.2",
     "flag-icon-css": "^3.5.0",

@@ -16,6 +16,8 @@ namespace ME_API.Data
         public DbSet<MES_Audit_PIC_D> MES_Audit_PIC_D { get; set; }
         public DbSet<MES_Audit_Org> MES_Audit_Org { get; set; }
         public DbSet<MES_Org> MES_Org { get; set; }
+        public DbSet<MES_Audit_Rec_M> MES_Audit_Rec_M { get; set; }
+        public DbSet<MES_Audit_Rec_D> MES_Audit_Rec_D { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MES_Audit_Type_D>().HasKey(x => new { x.Audit_Type_ID, x.Audit_Item_ID });
@@ -25,7 +27,9 @@ namespace ME_API.Data
             modelBuilder.Entity<MES_Audit_PIC_M>().HasKey(x => new { x.PIC_Type_ID });
             modelBuilder.Entity<MES_Audit_PIC_D>().HasKey(x => new { x.PIC_Type_ID, x.Resp_ID });
             modelBuilder.Entity<MES_Audit_Org>().HasKey(x => new { x.Factory_ID, x.PDC_ID, x.Line_ID, x.Dept_ID });
-            modelBuilder.Entity<MES_Org>().HasKey(x=> new{x.Factory_ID, x.PDC_ID, x.Line_ID, x.Dept_ID});
+            modelBuilder.Entity<MES_Org>().HasKey(x => new { x.Factory_ID, x.PDC_ID, x.Line_ID, x.Dept_ID });
+            modelBuilder.Entity<MES_Audit_Rec_M>().HasKey(x=> new { x.Record_ID});
+            modelBuilder.Entity<MES_Audit_Rec_D>().HasKey(x=>new {x.Record_ID, x.Item_no});
         }
     }
 }

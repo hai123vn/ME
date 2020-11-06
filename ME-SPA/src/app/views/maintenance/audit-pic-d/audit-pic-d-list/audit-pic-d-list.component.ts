@@ -45,8 +45,8 @@ export class AuditPicDListComponent implements OnInit {
     );
     this.route.data.subscribe(data => {
       console.log(data);
-      this.auditPics = data["auditPicDs"].result;
-      this.pagination = data["auditPicDs"].pagination;
+      this.auditPics = data["auditPics"].result;
+      this.pagination = data["auditPics"].pagination;
     });
     // this.load();
   }
@@ -99,14 +99,15 @@ export class AuditPicDListComponent implements OnInit {
     this.router.navigate(["/maintenance/audit-pic-d/add"]);
   }
 
-  changePageUpdate() {
-    this.auditPic = this.auditPic;
+  changePageUpdate(auditPic1: AuditPicD) {
+    this.auditPic = auditPic1;
     this.auditService.changeAuditPicD(this.auditPic);
     this.auditService.changeFlag("1");
     this.router.navigate(['/maintenance/audit-pic-d/update']);
   }
 
   search() {
+    this.pagination.currentPage = 1;
     if (this.text !== '') {
       this.searchKey = true;
       this.auditService.search(

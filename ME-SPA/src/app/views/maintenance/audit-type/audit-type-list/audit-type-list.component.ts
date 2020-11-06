@@ -57,6 +57,7 @@ export class AuditTypeListComponent implements OnInit {
   }
 
   search() {
+    this.pagination.currentPage = 1;
     if (this.text !== '') {
       this.auditTypeService.search(this.pagination.currentPage, this.pagination.itemsPerPage, this.text)
         .subscribe((res: PaginationResult<AuditType[]>) => {

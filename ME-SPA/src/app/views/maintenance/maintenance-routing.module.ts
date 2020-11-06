@@ -157,7 +157,7 @@ const routes: Routes = [
                     {
                         path: '',
                         component: AuditPicDListComponent,
-                        resolve: { auditPicDs : AuditPicDListResolver},
+                        resolve: { auditPics : AuditPicDListResolver},
                         data: {
                             title: 'Audit Pic D'
                         }
