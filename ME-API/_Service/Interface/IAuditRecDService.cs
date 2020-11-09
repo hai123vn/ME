@@ -11,12 +11,12 @@ namespace ME_API._Service.Interface
         Task<PagedList<AuditRecDto>> GetAllAuditRecViewModel(PaginationParams param);
         Task<List<string>> GetAllStatus();
         Task<PagedList<AuditRecDto>> SearchByModel(PaginationParams param, AuditRecSearch model);
-        Task<List<AuditPicDDto>> GetAllExcel();
-        Task<List<AuditPicDDto>> SearchExcel(AuditRecSearch model, string WT = "1");
+        Task<List<AuditRecDto>> GetAllExcel();
+        Task<List<AuditRecDto>> SearchExcel(AuditRecSearch model, string WT = "1");
         Task<bool> AddRecD(AuditRecDDto model);
         Task<bool> UpdateRecD(AuditRecDDto model);
         Task<AuditRecDDto>  GetRecDById(string record_ID, int item_no);
-        Task<AuditPicDDto> GetById(string record_ID);
+        Task<AuditRecDDto> GetById(string record_ID);
         Task<List<ImproveProjectDto>> ImproveProjectRecordsImplementedRateThisMonth();
         Task<List<ImproveProjectDto>> ImproveProjectRecordImplementedRateLastMonth();
         Task<List<string>> GetListMail(string line);

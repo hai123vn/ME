@@ -11,21 +11,22 @@ import { map } from 'rxjs/operators';
 export class AuthService {
   baseUrl = environment.apiUrl + 'auth';
   jwtHelper = new JwtHelperService();
-  currentUser: User;
   decodedToken: any;
 
 
   constructor(private http: HttpClient) { }
 
-  login(model: any) {
+  
+  login(model: User) {
+debugger
     return this.http.post(this.baseUrl + '/login', model).pipe(
       map((response: any) => {
+        debugger
         const user = response;
         if (user) {
           localStorage.setItem('token', user.token);
           localStorage.setItem('user', JSON.stringify(user, user));
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          this.currentUser = user.user;
         }
       }),
     );
@@ -33,11 +34,6 @@ export class AuthService {
 
   loggedIn() {
     const token = localStorage.getItem('token');
-    const curentUser = JSON.parse(localStorage.getItem("user"));
-    if(curentUser == null || curentUser.role == undefined)
-    {
-      return false;
-    }
     return !this.jwtHelper.isTokenExpired(token);
   }
 }

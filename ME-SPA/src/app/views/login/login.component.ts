@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    console.log(this.user);
-    this.spinner.show();
     this.authService.login(this.user).subscribe(
       next => {
         this.alertify.success("Login Success !!");

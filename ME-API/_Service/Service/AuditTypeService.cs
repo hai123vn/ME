@@ -195,7 +195,7 @@ namespace ME_API._Service.Service
 
             //add DB
             _repoAuditType.Add(listAuditTypeM);
-            _repoAuditType.AddMultiple(listAuditTypeD);
+            _repoAuditTypeD.AddMultiple(listAuditTypeD);
             try
             {
                 //save

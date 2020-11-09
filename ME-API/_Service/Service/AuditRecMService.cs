@@ -204,9 +204,10 @@ namespace ME_API._Service.Service
             return await _repoM.SaveAll();
         }
 
-        public Task<AuditRecDDto> GetRecMById(string record_ID)
+        public async Task<AuditRecMDto> GetRecMById(string record_ID)
         {
-            throw new System.NotImplementedException();
+            var data = await _repoM.FindAll(x => x.Record_ID.Trim() == record_ID.Trim()).ToListAsync();
+            return _mapper.Map<List<AuditRecMDto>>(data).FirstOrDefault();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace ME_API.Data
         IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties);
         IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
         void AddMultiple(List<T> entities);
+        IQueryable<T> GetAll();
         T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
     }
 }

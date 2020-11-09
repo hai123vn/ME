@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using ME_API._Repositories.Interfaces;
 using ME_API._Repositories.Repositories;
@@ -13,13 +9,10 @@ using ME_API.Helpers.AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -76,6 +69,9 @@ namespace ME_API
             services.AddScoped<IMesUserRepository, MesUserRepository>();
             services.AddScoped<IMesAuditOrgRepository, MesAuditOrgRepository>();
             services.AddScoped<IMesOrgRepository, MesOrgRepository>();
+            services.AddScoped<IAuditRecDRepository, AuditRecDRepository>();
+            services.AddScoped<IAuditRecMRepository, AuditRecMRepository>();
+            services.AddScoped<IMesMoRepository, MesMoRepository>();
 
             //Services
             services.AddScoped<IAuthService, AuthService>();
@@ -88,7 +84,9 @@ namespace ME_API
             services.AddScoped<IMesUserService, MesUserService>();
             services.AddScoped<IMesAuditOrgService, MesAuditOrgService>();
             services.AddScoped<IMesOrgService, MesOrgService>();
-
+            services.AddScoped<IAuditRecDService, AuditRecDService>();
+            services.AddScoped<IAuditRecMService, AuditRecMService>();
+            services.AddScoped<IMesMoService, MesMoService>();
 
             // Swagger
             services.AddSwaggerGen(c =>

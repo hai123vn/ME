@@ -17,6 +17,6 @@ namespace ME_API._Service.Interface
         Task<bool> ImportExcel(string filePath, string userName);
         Task<string> GetRecordIdRate();
         Task<object> GetAllRecordID();
-        Task<AuditRecDDto> GetRecMById(string record_ID);
+        Task<AuditRecMDto> GetRecMById(string record_ID);
     }
 }

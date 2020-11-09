@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthGuard } from '../../_core/_guards/auth.guard';
 import { User } from '../../_core/_model/user';
 import { AlertifyService } from '../../_core/_service/alertify.service';
 import { AuthService } from '../../_core/_service/auth.service';
@@ -32,7 +31,6 @@ export class DefaultLayoutComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.authService.decodedToken = null;
-    this.authService.currentUser = null;
     this.alertify.message('Logged out');
     this.router.navigate(['/login']);
   }

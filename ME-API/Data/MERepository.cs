@@ -21,7 +21,7 @@ namespace ME_API.Data
 
         public void AddMultiple(List<T> entities)
         {
-           _context.AddRange(entities);
+            _context.AddRange(entities);
         }
 
         public IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties)
@@ -58,6 +58,11 @@ namespace ME_API.Data
         public T FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             return FindAll(includeProperties).SingleOrDefault(predicate);
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            return _context.Set<T>().AsQueryable();
         }
 
         public void Remove(T entity)

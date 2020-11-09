@@ -14,5 +14,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3"/>
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.1"/>
     <PackageReference Include="EPPlus" Version="5.4.1"/>
+    <PackageReference Include="Aspose.Cells" Version="20.1.0"/>
+    <PackageReference Include="DependencyInjection" Version="1.2.0"/>
   </ItemGroup>
 </Project>
