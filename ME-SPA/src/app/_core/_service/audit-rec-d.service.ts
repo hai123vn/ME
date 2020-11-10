@@ -97,7 +97,7 @@ export class AuditRecDService {
       params.append("pageSize", itemPerPage);
     }
 
-    let url = this.baseUrl + "auditRecD/searchModel/";
+    let url = this.baseUrl + "auditRecD/searchModel";
     return this.http.post<any>(url, auditRecSearch, { observe: "response" })
       .pipe(
         map((response) => {
@@ -473,6 +473,6 @@ export class AuditRecDService {
   }
 
   getListMail(line: string) {
-    return this.http.get<any>(this.baseUrl + "auditRecD/getListMail", {params: {line: line}});
+    return this.http.get<any>(this.baseUrl + "auditRecD/getListMail", { params: { line: line } });
   }
 }

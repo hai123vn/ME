@@ -27,6 +27,7 @@ import { BrandListComponent } from './brands/brand-list/brand-list.component';
 import { BrandUpdateComponent } from './brands/brand-update/brand-update.component';
 import { MaintenanceRoutingModule } from './maintenance-routing.module';
 import { UserListComponent } from './user/user-list/user-list.component';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
         PaginationModule.forRoot(),
         NgSelect2Module,
         ModalModule.forRoot(),
+        BsDatepickerModule.forRoot(),
     ],
     declarations: [
         BrandListComponent,
@@ -65,4 +67,4 @@ import { UserListComponent } from './user/user-list/user-list.component';
         NgxSpinnerService,
     ]
 })
-export class MaintenanceModule {}
+export class MaintenanceModule { }

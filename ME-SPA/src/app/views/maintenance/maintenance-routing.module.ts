@@ -17,6 +17,7 @@ import { AuditPicMListComponent } from './audit-pic-m/audit-pic-m-list/audit-pic
 import { AuditPicMUpdateComponent } from './audit-pic-m/audit-pic-m-update/audit-pic-m-update.component';
 import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d-add.component';
 import { AuditRecDListComponent } from './audit-rec-d/audit-rec-d-list/audit-rec-d-list.component';
+import { AuditRecListComponent } from './audit-rec-d/audit-rec-list/audit-rec-list.component';
 import { AuditRecMAddComponent } from './audit-rec-d/audit-rec-m-add/audit-rec-m-add.component';
 import { AuditRecMListComponent } from './audit-rec-d/audit-rec-m-list/audit-rec-m-list.component';
 import { AuditTypeDAddComponent } from './audit-type-d/audit-type-d-add/audit-type-d-add.component';
@@ -190,7 +191,7 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        component: AuditRecDListComponent,
+                        component: AuditRecListComponent,
                         resolve: { auditRecs: AuditRecViewModelListResolver },
                         data: {
                             title: 'WT Tracking List'

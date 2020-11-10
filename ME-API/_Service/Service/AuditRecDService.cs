@@ -110,7 +110,8 @@ namespace ME_API._Service.Service
             var listAuditRecM = _repoM.FindAll();
             var listAuditRecD = _repoD.FindAll();
             var listAuditMes = _repoMes.FindAll().Where(x => x.Status == 1);
-            var listAuditRecDto = listAuditRecD.Join(listAuditRecM, x => x.Record_ID, y => y.Record_ID, (x, y) => new { x, y }).Join(listAuditMes, z => z.y.Line, t => t.Line_ID_2, (z, t)
+            var listAuditRecDto = listAuditRecD.Join(listAuditRecM, x => x.Record_ID, y => y.Record_ID, (x, y) => new { x, y })
+            .Join(listAuditMes, z => z.y.Line, t => t.Line_ID_2, (z, t)
                            => new AuditRecDto
                            {
                                Record_ID = z.x.Record_ID,

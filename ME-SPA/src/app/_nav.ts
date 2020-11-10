@@ -40,5 +40,10 @@ export const navItems: INavData[] = [
     url: '/maintenance/audit-pic-d',
     icon: 'icon-notebook'
   },
+  {
+    name: 'WT Tracking List',
+    url: '/maintenance/audit-rec',
+    icon: 'icon-eyeglass'
+  },
  
 ];

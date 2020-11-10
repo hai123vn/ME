@@ -57,6 +57,7 @@ import { AuditPicMListResolver } from './_core/_resolver/audit-pic-m-list.resolv
 import { AuditPicDListResolver } from './_core/_resolver/audit-pic-d-list.resolver';
 import { AuditRecMListResolver } from './_core/_resolver/audit-rec-m-list.resolver';
 import { AuditRecDListResolver } from './_core/_resolver/audit-rec-d-list.resolver';
+import { AuditRecViewModelListResolver } from './_core/_resolver/audit-rec-viewmodel-list.resolver';
 
 @NgModule({
   providers: [
@@ -72,6 +73,7 @@ import { AuditRecDListResolver } from './_core/_resolver/audit-rec-d-list.resolv
     AuditPicDListResolver,
     AuditRecDListResolver,
     AuditRecMListResolver,
+    AuditRecViewModelListResolver,
     AuthService,
     AuthGuard
   ],
@@ -99,7 +101,7 @@ import { AuditRecDListResolver } from './_core/_resolver/audit-rec-d-list.resolv
         allowedDomains: ["localhost:5002"],
         disallowedRoutes: ["localhost: 5002/api/auth"]
       }
-    })
+    }), 
   ],
   declarations: [
     AppComponent,
