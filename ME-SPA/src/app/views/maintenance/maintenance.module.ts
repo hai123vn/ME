@@ -11,6 +11,11 @@ import { AuditPicDUpdateComponent } from './audit-pic-d/audit-pic-d-update/audit
 import { AuditPicMAddComponent } from './audit-pic-m/audit-pic-m-add/audit-pic-m-add.component';
 import { AuditPicMListComponent } from './audit-pic-m/audit-pic-m-list/audit-pic-m-list.component';
 import { AuditPicMUpdateComponent } from './audit-pic-m/audit-pic-m-update/audit-pic-m-update.component';
+import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d-add.component';
+import { AuditRecDListComponent } from './audit-rec-d/audit-rec-d-list/audit-rec-d-list.component';
+import { AuditRecListComponent } from './audit-rec-d/audit-rec-list/audit-rec-list.component';
+import { AuditRecMAddComponent } from './audit-rec-d/audit-rec-m-add/audit-rec-m-add.component';
+import { AuditRecMListComponent } from './audit-rec-d/audit-rec-m-list/audit-rec-m-list.component';
 import { AuditTypeDAddComponent } from './audit-type-d/audit-type-d-add/audit-type-d-add.component';
 import { AuditTypeDListComponent } from './audit-type-d/audit-type-d-list/audit-type-d-list.component';
 import { AuditTypeDUpdateComponent } from './audit-type-d/audit-type-d-update/audit-type-d-update.component';
@@ -50,6 +55,11 @@ import { UserListComponent } from './user/user-list/user-list.component';
         AuditPicDListComponent,
         AuditPicDAddComponent,
         AuditPicDUpdateComponent,
+        AuditRecDListComponent,
+        AuditRecDAddComponent,
+        AuditRecListComponent,
+        AuditRecMAddComponent,
+        AuditRecMListComponent,
     ],
     providers: [
         NgxSpinnerService,

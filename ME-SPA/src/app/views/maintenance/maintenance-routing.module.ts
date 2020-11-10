@@ -2,6 +2,9 @@ import { Component, NgModule } from '@angular/core';
 import { Router, RouterModule, Routes } from "@angular/router";
 import { AuditPicDListResolver } from '../../_core/_resolver/audit-pic-d-list.resolver';
 import { AuditPicMListResolver } from '../../_core/_resolver/audit-pic-m-list.resolver';
+import { AuditRecDListResolver } from '../../_core/_resolver/audit-rec-d-list.resolver';
+import { AuditRecMListResolver } from '../../_core/_resolver/audit-rec-m-list.resolver';
+import { AuditRecViewModelListResolver } from '../../_core/_resolver/audit-rec-viewmodel-list.resolver';
 import { AuditTypeDListResolver } from '../../_core/_resolver/audit-type-d-list.resolver';
 import { AuditTypeListResolver } from '../../_core/_resolver/audit-type-list.resolver';
 import { BrandListResolver } from '../../_core/_resolver/brand-list.resolver';
@@ -12,6 +15,10 @@ import { AuditPicDUpdateComponent } from './audit-pic-d/audit-pic-d-update/audit
 import { AuditPicMAddComponent } from './audit-pic-m/audit-pic-m-add/audit-pic-m-add.component';
 import { AuditPicMListComponent } from './audit-pic-m/audit-pic-m-list/audit-pic-m-list.component';
 import { AuditPicMUpdateComponent } from './audit-pic-m/audit-pic-m-update/audit-pic-m-update.component';
+import { AuditRecDAddComponent } from './audit-rec-d/audit-rec-d-add/audit-rec-d-add.component';
+import { AuditRecDListComponent } from './audit-rec-d/audit-rec-d-list/audit-rec-d-list.component';
+import { AuditRecMAddComponent } from './audit-rec-d/audit-rec-m-add/audit-rec-m-add.component';
+import { AuditRecMListComponent } from './audit-rec-d/audit-rec-m-list/audit-rec-m-list.component';
 import { AuditTypeDAddComponent } from './audit-type-d/audit-type-d-add/audit-type-d-add.component';
 import { AuditTypeDListComponent } from './audit-type-d/audit-type-d-list/audit-type-d-list.component';
 import { AuditTypeDUpdateComponent } from './audit-type-d/audit-type-d-update/audit-type-d-update.component';
@@ -157,7 +164,7 @@ const routes: Routes = [
                     {
                         path: '',
                         component: AuditPicDListComponent,
-                        resolve: { auditPics : AuditPicDListResolver},
+                        resolve: { auditPics: AuditPicDListResolver },
                         data: {
                             title: 'Audit Pic D'
                         }
@@ -176,6 +183,63 @@ const routes: Routes = [
                             title: 'Update Audit Pic D'
                         }
                     }
+                ]
+            },
+            {
+                path: 'audit-rec',
+                children: [
+                    {
+                        path: '',
+                        component: AuditRecDListComponent,
+                        resolve: { auditRecs: AuditRecViewModelListResolver },
+                        data: {
+                            title: 'WT Tracking List'
+                        }
+                    },
+                    {
+                        path: 'audit-recM-list',
+                        component: AuditRecMListComponent,
+                        resolve: { auditRecMs: AuditRecMListResolver },
+                        data: {
+                            title: 'List Meeting Minutes'
+                        }
+                    },
+                    {
+                        path: 'audit-recD-list',
+                        component: AuditRecDListComponent,
+                        resolve: { auditRecDs: AuditRecDListResolver },
+                        data: {
+                            title: 'List WT Tracking List'
+                        }
+                    },
+                    {
+                        path: 'add-audit-recM',
+                        component: AuditRecMAddComponent,
+                        data: {
+                            title: 'Add Meeting Minutes'
+                        }
+                    },
+                    {
+                        path: 'update-audit-recM',
+                        component: AuditRecMAddComponent,
+                        data: {
+                            title: 'Update Meeting Minutes'
+                        }
+                    },
+                    {
+                        path: 'add-audit-recD',
+                        component: AuditRecDAddComponent,
+                        data: {
+                            title: 'Add new WT Tracking List'
+                        }
+                    },
+                    {
+                        path: 'update-audit-recD',
+                        component: AuditRecDAddComponent,
+                        data: {
+                            title: 'Update new WT Tracking List'
+                        }
+                    },
                 ]
             }
         ]

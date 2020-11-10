@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ME_API._Service.Interface;
+using ME_API.DTO;
 using ME_API.Helpers;
 using ME_API.ViewModel;
 using Microsoft.AspNetCore.Hosting;
@@ -129,6 +130,21 @@ namespace ME_API.Controller
                 }
             }
             return false;
+        }
+
+        [HttpPost("edit")]
+        public async Task<IActionResult> UpdateRecM([FromBody] AuditRecMDto model)
+        {
+            if (await _service.Update(model))
+                return NoContent();
+            return BadRequest("Updating Failed");
+        }
+
+        [HttpGet("getbyid/{recordID}")]
+        public async Task<IActionResult> GetbyId(string recordID)
+        {
+            var data = await _service.GetRecMById(recordID);
+            return Ok(data);
         }
     }
 }

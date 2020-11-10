@@ -55,6 +55,8 @@ import { AuthService } from './_core/_service/auth.service';
 import { AuthGuard } from './_core/_guards/auth.guard';
 import { AuditPicMListResolver } from './_core/_resolver/audit-pic-m-list.resolver';
 import { AuditPicDListResolver } from './_core/_resolver/audit-pic-d-list.resolver';
+import { AuditRecMListResolver } from './_core/_resolver/audit-rec-m-list.resolver';
+import { AuditRecDListResolver } from './_core/_resolver/audit-rec-d-list.resolver';
 
 @NgModule({
   providers: [
@@ -68,6 +70,8 @@ import { AuditPicDListResolver } from './_core/_resolver/audit-pic-d-list.resolv
     AuditTypeDListResolver,
     AuditPicMListResolver,
     AuditPicDListResolver,
+    AuditRecDListResolver,
+    AuditRecMListResolver,
     AuthService,
     AuthGuard
   ],
@@ -92,7 +96,7 @@ import { AuditPicDListResolver } from './_core/_resolver/audit-pic-d-list.resolv
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:5002"], 
+        allowedDomains: ["localhost:5002"],
         disallowedRoutes: ["localhost: 5002/api/auth"]
       }
     })
