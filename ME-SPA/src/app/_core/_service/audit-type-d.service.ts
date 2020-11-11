@@ -59,7 +59,7 @@ export class AuditTypeDService {
   }
 
   searchauditItem(auditTypeId: any) {
-    return this.http.get<any>(this.baseUrl + 'auditTypeD/auditItem' + auditTypeId.toString(), {});
+    return this.http.get<any>(this.baseUrl + 'auditTypeD/auditItem/' + auditTypeId.toString(), {});
   }
 
   create(auditTypeD: FormData) {

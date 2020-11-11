@@ -65,7 +65,7 @@ namespace ME_API.Controller
             return Ok(auditRecs);
         }
 
-        [HttpPost("getbyid/{recordID}/{item_no}")]
+        [HttpGet("getbyid/{recordID}/{item_no}")]
         public async Task<IActionResult> GetById(string recordID, int item_no)
         {
             var data = await _service.GetRecDById(recordID, item_no);
@@ -85,9 +85,9 @@ namespace ME_API.Controller
             {
                 auditRecDDto.Item_no = 1;
             }
-            // var username = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            auditRecDDto.Updated_By = "username";
-            auditRecDDto.Implement_User = "username";
+            var username = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            auditRecDDto.Updated_By = username;
+            auditRecDDto.Implement_User = username;
             string folder = _webHostEnvironmentl.WebRootPath + "\\uploaded\\images";
             if (auditRecDDto.Before_Picture != "")
             {

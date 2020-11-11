@@ -28,6 +28,7 @@ export class AuditRecDService {
     audit_Type_ID: '',
     audit_Item: '',
     pD_PIC: '',
+    pD_Department: '',
     pD_Building: '',
     mE_PIC: '',
     issue_LL: '',
@@ -37,90 +38,109 @@ export class AuditRecDService {
     before_Picture: '',
     after_Picture: ''
   });
-  currentAuditRecD = this.auditRecDSource.asObservable();
-  flagSource = new BehaviorSubject<string>('0');
+  currentAuditPicD = this.auditRecDSource.asObservable();
+  flagSource = new BehaviorSubject<string>("0");
   currentFlag = this.flagSource.asObservable();
   allAuditRecD: AuditRecViewModel[] = [];
   searchAuditRecD: AuditRecViewModel[] = [];
-
   constructor(private http: HttpClient) { }
-
-  getListRecDs(page?, itemPerPage?): Observable<PaginationResult<AuditRecD[]>> {
-    const paginationResult: PaginationResult<AuditRecD[]> = new PaginationResult<AuditRecD[]>();
+  getListRecDs(page?, itemsPerPage?): Observable<PaginationResult<AuditRecD[]>> {
+    const paginatedResult: PaginationResult<AuditRecD[]> = new PaginationResult<
+      AuditRecD[]
+    >();
     let params = new HttpParams();
-    if (page != null && itemPerPage != null) {
+    if (page != null && itemsPerPage != null) {
       params = params.append("pageNumber", page);
-      params = params.append("pageSiz", itemPerPage);
+      params = params.append("pageSize", itemsPerPage);
     }
-    return this.http.get<AuditRecD[]>(this.baseUrl + "auditRecD/recDs/", {
-      observe: "response",
-      params,
-    }).pipe(
-      map((response) => {
-        paginationResult.result = response.body;
-        if (response.headers.get("Pagination") != null) {
-          paginationResult.pagination = JSON.parse(response.headers.get("Pagination"));
-        }
-        return paginationResult;
+    return this.http
+      .get<AuditRecD[]>(this.baseUrl + "auditRecD/recDs/", {
+        observe: "response",
+        params,
       })
-    );
+      .pipe(
+        map((response) => {
+          paginatedResult.result = response.body;
+          if (response.headers.get("Pagination") != null) {
+            paginatedResult.pagination = JSON.parse(
+              response.headers.get("Pagination")
+            );
+          }
+          return paginatedResult;
+        })
+      );
   }
-
-  getListAll(page?, itemPerPage?): Observable<PaginationResult<AuditRecViewModel[]>> {
-    const paginationResult: PaginationResult<AuditRecViewModel[]> = new PaginationResult<AuditRecViewModel[]>();
+  getListAll(
+    page?,
+    itemsPerPage?
+  ): Observable<PaginationResult<AuditRecViewModel[]>> {
+    const paginatedResult: PaginationResult<
+      AuditRecViewModel[]
+    > = new PaginationResult<AuditRecViewModel[]>();
     let params = new HttpParams();
-    if (page != null && itemPerPage != null) {
+    if (page != null && itemsPerPage != null) {
       params = params.append("pageNumber", page);
-      params = params.append("pageSize", page);
+      params = params.append("pageSize", itemsPerPage);
     }
-
-    return this.http.get<AuditRecViewModel[]>(this.baseUrl + "auditRecD/all", {
-      observe: "response",
-      params,
-    })
+    return this.http
+      .get<AuditRecViewModel[]>(this.baseUrl + "auditRecD/all", {
+        observe: "response",
+        params,
+      })
       .pipe(
         map((response) => {
-          paginationResult.result = response.body;
+          paginatedResult.result = response.body;
           if (response.headers.get("Pagination") != null) {
-            paginationResult.pagination = JSON.parse(response.headers.get("Pagination"));
+            paginatedResult.pagination = JSON.parse(
+              response.headers.get("Pagination")
+            );
           }
-          return paginationResult;
+          return paginatedResult;
         })
       );
   }
-
-  search(page?, itemPerPage?, auditRecSearch?: AuditRecSearch): Observable<PaginationResult<AuditRecViewModel[]>> {
-    const paginationResult: PaginationResult<AuditRecViewModel[]> = new PaginationResult<AuditRecViewModel[]>();
+  search(
+    page?,
+    itemsPerPage?,
+    auditRecSearch?: AuditRecSearch
+  ): Observable<PaginationResult<AuditRecViewModel[]>> {
+    const paginatedResult: PaginationResult<
+      AuditRecViewModel[]
+    > = new PaginationResult<AuditRecViewModel[]>();
     let params = new HttpParams();
-    if (page != null && itemPerPage != null) {
-      params.append("pageNumber", page);
-      params.append("pageSize", itemPerPage);
+    if (page != null && itemsPerPage != null) {
+      params = params.append("pageNumber", page);
+      params = params.append("pageSize", itemsPerPage);
     }
-
-    let url = this.baseUrl + "auditRecD/searchModel";
-    return this.http.post<any>(url, auditRecSearch, { observe: "response" })
+    // tslint:disable-next-line:prefer-const
+    let url = this.baseUrl + "auditRecD/searchModel/";
+    return this.http
+      .post<any>(url, auditRecSearch, { observe: "response", params })
       .pipe(
         map((response) => {
-          paginationResult.result = response.body;
+          paginatedResult.result = response.body;
           if (response.headers.get("Pagination") != null) {
-            paginationResult.pagination = JSON.parse(response.headers.get("Pagination"));
+            paginatedResult.pagination = JSON.parse(
+              response.headers.get("Pagination")
+            );
           }
-          return paginationResult;
+          return paginatedResult;
         })
       );
   }
-
   dateFormat(today: Date) {
     if (today === null || today === undefined) {
       return null;
     } else {
+      // tslint:disable-next-line:prefer-const
       let arr = today.toString().split("T");
+      // tslint:disable-next-line:prefer-const
       let result = arr[0] + " " + arr[1];
       return result;
     }
   }
-
   createAuditRecD(auditRecD: AuditRecD) {
+    debugger;
     console.log(auditRecD);
     console.log("let go img64: ", auditRecD);
     return this.http.post(this.baseUrl + "auditRecD/addnew/", auditRecD);
@@ -133,7 +153,7 @@ export class AuditRecDService {
   async exportExcelDetail(auditRecSearch: AuditRecSearch) {
     let url = this.baseUrl + "auditRecD/SearchExcel/";
     this.http.post<any>(url, auditRecSearch).subscribe((res) => {
-      const headers = [
+      const header = [
         "Record_ID",
         "Record_Time",
         "PDC",
@@ -143,9 +163,9 @@ export class AuditRecDService {
         "Model_No",
         "Chief",
         "Recorder",
-        "Attendees"
+        "Attendees",
       ];
-      const headers1 = [
+      const header1 = [
         "Record_ID",
         "Item_No",
         "ERCS",
@@ -172,14 +192,16 @@ export class AuditRecDService {
         delete item.before_Picture;
         delete item.after_Picture;
       });
-
-
+      // tslint:disable-next-line:prefer-const
       let arr = [];
       let arr1 = [];
 
+
       this.allAuditRecD.forEach((item) => {
+        // tslint:disable-next-line:prefer-const
         let bool = false;
-        for (let i = 1; i < arr.length; i++) {
+        debugger;
+        for (let i = 1; i <= arr.length; i++) {
           if (arr[i - 1][0] == item.record_ID) {
             bool = true;
             break;
@@ -188,8 +210,8 @@ export class AuditRecDService {
         let itemConvert = [];
         let itemConvert1 = [];
         if (bool == false) {
-          itemConvert[0] = item.record_ID,
-            itemConvert[1] = this.dateFormat(item.record_Time);
+          itemConvert[0] = item.record_ID;
+          itemConvert[1] = this.dateFormat(item.record_Time);
           itemConvert[2] = item.pdc;
           itemConvert[3] = item.building;
           itemConvert[4] = item.line;
@@ -201,8 +223,8 @@ export class AuditRecDService {
           arr.push(itemConvert);
         }
 
-        itemConvert1[0] = item.record_ID,
-          itemConvert1[1] = item.item_no;
+        itemConvert1[0] = item.record_ID;
+        itemConvert1[1] = item.item_no;
         itemConvert1[2] = item.ercs;
         itemConvert1[3] = item.audit_Type;
         itemConvert1[4] = item.audit_Item;
@@ -223,24 +245,25 @@ export class AuditRecDService {
         arr1.push(itemConvert1);
       });
 
-      //Create workbook and worksheet
+      // Create workbook and worksheet
       const workbook = new ExcelJS.Workbook();
       const worksheet = workbook.addWorksheet("AuditRecM");
       const worksheet1 = workbook.addWorksheet("AuditRecD");
-      //Add header Row
-      const headerRow = worksheet.addRow(headers);
-      const headerRow1 = worksheet.addRow(headers1);
-      //Cell style: Fill and Border
+      // Add header Row
+      const headerRow = worksheet.addRow(header);
+      const headerRow1 = worksheet1.addRow(header1);
+      // Cell Style : Fill and Border
       headerRow.font = {
         size: 12,
       };
 
+      // tslint:disable-next-line:variable-name
       headerRow.eachCell((cell, number) => {
         cell.fill = {
           type: "pattern",
           pattern: "solid",
           fgColor: { argb: "33ff33" },
-          bfColor: { argb: "33ff33" },
+          bgColor: { argb: "33ff33" },
         };
         cell.border = {
           top: { style: "thin" },
@@ -275,6 +298,8 @@ export class AuditRecDService {
       });
       worksheet.getColumn(1).width = 17;
       worksheet.getColumn(2).width = 17;
+      worksheet.getColumn(3).width = 17;
+      worksheet.getColumn(4).width = 20;
       worksheet.getColumn(6).width = 15;
       worksheet.getColumn(6).width = 13;
       worksheet.getColumn(6).width = 13;
@@ -294,7 +319,7 @@ export class AuditRecDService {
       worksheet1.getColumn(17).width = 20;
       worksheet1.getColumn(18).width = 20;
       const countAudit = arr1.length;
-      for (let i = 0; i < countAudit + 2; i++) {
+      for (let i = 1; i < countAudit + 2; i++) {
         worksheet.getCell("J" + i).alignment = { wrapText: true };
         worksheet1.getCell("F" + i).alignment = { wrapText: true };
         worksheet1.getCell("G" + i).alignment = { wrapText: true };
@@ -302,7 +327,8 @@ export class AuditRecDService {
         worksheet1.getCell("J" + i).alignment = { wrapText: true };
         worksheet1.getCell("R" + i).alignment = { wrapText: true };
       }
-      //Tạo tệp Excel với tên đã cho
+      // Generate Excel File with given name
+      // tslint:disable-next-line:no-shadowed-variable
       workbook.xlsx.writeBuffer().then((data: any) => {
         const blob = new Blob([data], {
           type:
@@ -312,26 +338,40 @@ export class AuditRecDService {
       });
     });
   }
-
   async exportWTTracking(auditRecSearch: AuditRecSearch) {
-    return this.http.post(this.baseUrl + "auditRecD/ExportExcelWTTrackingList", auditRecSearch, { responseType: "blob" }).subscribe((result: Blob) => {
-      console.log(result);
-      if (result.type !== "application/xlsx") {
-        alert(result.type);
-      }
-      const blob = new Blob([result]);
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      const currentTime = new Date();
-      const filename = "WT_Tracking_List" + currentTime.getFullYear().toString() + (currentTime.getMonth() + 1) + currentTime.getDate() + currentTime.toLocaleDateString().replace(/[ ]|[,],[:]/g, "").trim() + " .xlsx";
-      link.href = url;
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-    });
+    return this.http
+      .post(
+        this.baseUrl + "auditRecD/ExportExcelWTTrackingList",
+        auditRecSearch,
+        { responseType: "blob" }
+      )
+      .subscribe((result: Blob) => {
+        console.log(result);
+        if (result.type !== "application/xlsx") {
+          alert(result.type);
+        }
+        const blob = new Blob([result]);
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const currentTime = new Date();
+        const filename =
+          "WT_Tracking_List" +
+          currentTime.getFullYear().toString() +
+          (currentTime.getMonth() + 1) +
+          currentTime.getDate() +
+          currentTime
+            .toLocaleTimeString()
+            .replace(/[ ]|[,]|[:]/g, "")
+            .trim() +
+          ".xlsx";
+        link.href = url;
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
+      });
   }
-
   async getSearchExcel(auditRecSearch: AuditRecSearch) {
+    // tslint:disable-next-line:prefer-const
     let url = this.baseUrl + "auditRecD/SearchExcel/";
     this.http.post<any>(url, auditRecSearch).subscribe((res) => {
       const header = [
@@ -358,8 +398,11 @@ export class AuditRecDService {
         "ME_PIC",
         "Finished_Date",
         "Status",
+        "Remark",
         "Updated_By",
         "Updated_Time",
+        "Implement_By",
+        "Implement_Time",
       ];
       this.searchAuditRecD = res;
       this.searchAuditRecD.map((item) => {
@@ -367,9 +410,10 @@ export class AuditRecDService {
         delete item.before_Picture;
         delete item.after_Picture;
       });
-
+      // tslint:disable-next-line:prefer-const
       let arr = [];
       this.searchAuditRecD.forEach((item) => {
+        // tslint:disable-next-line:prefer-const
         let itemConvert = [];
         itemConvert[0] = item.record_ID;
         itemConvert[1] = this.dateFormat(item.record_Time);
@@ -401,12 +445,16 @@ export class AuditRecDService {
         itemConvert[27] = this.dateFormat(item.implement_Time);
         arr.push(itemConvert);
       });
-      //Create workboot and worksheet
+      // Create workbook and worksheet
       const workbook = new ExcelJS.Workbook();
       const worksheet = workbook.addWorksheet("ME");
       // Add header Row
       const headerRow = worksheet.addRow(header);
-      //Cell style: Fill and Border
+      // Cell Style : Fill and Border
+      headerRow.font = {
+        size: 12,
+      };
+      // tslint:disable-next-line:variable-name
       headerRow.eachCell((cell, number) => {
         cell.fill = {
           type: "pattern",
@@ -418,10 +466,10 @@ export class AuditRecDService {
           top: { style: "thin" },
           left: { style: "thin" },
           bottom: { style: "thin" },
-          right: { style: "thin" }
+          right: { style: "thin" },
         };
       });
-      // add data and conditional formatting
+      // Add Data and Conditional Formatting
       arr.forEach((d) => {
         const row = worksheet.addRow(d);
       });
@@ -433,12 +481,12 @@ export class AuditRecDService {
       worksheet.getColumn(10).width = 30;
       worksheet.getColumn(15).width = 30;
       worksheet.getColumn(16).width = 30;
-      workbook.getColumn(17).width = 30;
-      workbook.getColumn(21).width = 17;
-      workbook.getColumn(24).width = 17;
-      workbook.getColumn(25).width = 17;
-      workbook.getColumn(26).width = 17;
-      workbook.getColumn(27).width = 20;
+      worksheet.getColumn(17).width = 30;
+      worksheet.getColumn(21).width = 17;
+      worksheet.getColumn(24).width = 17;
+      worksheet.getColumn(25).width = 17;
+      worksheet.getColumn(26).width = 17;
+      worksheet.getColumn(27).width = 20;
       const countAudit = arr.length;
       for (let i = 1; i < countAudit + 2; i++) {
         worksheet.getCell("K" + i).alignment = { wrapText: true };
@@ -447,32 +495,31 @@ export class AuditRecDService {
         worksheet.getCell("Q" + i).alignment = { wrapText: true };
       }
       // Generate Excel File with given name
+      // tslint:disable-next-line:no-shadowed-variable
       workbook.xlsx.writeBuffer().then((data: any) => {
         const blob = new Blob([data], {
-          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          type:
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         });
         fs.saveAs(blob, "ME.xlsx");
       });
     });
   }
-
   getListStatus() {
     return this.http.get<any>(this.baseUrl + "auditRecD/status", {});
   }
-
   changeAuditRecD(auditRecD: AuditRecD) {
     this.auditRecDSource.next(auditRecD);
   }
-
   changeFlag(flag: string) {
     this.flagSource.next(flag);
   }
-
   getAuditRecDById(recordID: string, item_no: string) {
-    return this.http.get(this.baseUrl + "auditRecD/getbyid" + recordID + "/" + item_no);
+    return this.http.get(
+      this.baseUrl + "auditRecD/getbyid/" + recordID + "/" + item_no
+    );
   }
-
   getListMail(line: string) {
-    return this.http.get<any>(this.baseUrl + "auditRecD/getListMail", { params: { line: line } });
+    return this.http.get<any>(this.baseUrl + 'auditRecD/getListMail', { params: { line: line } });
   }
 }

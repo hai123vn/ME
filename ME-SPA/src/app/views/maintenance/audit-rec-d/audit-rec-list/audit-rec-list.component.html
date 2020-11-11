@@ -9,7 +9,7 @@
             <div class="col-3">
               <input type="file" class="form-control input-file" [(ngModel)]="file_excel" #fileInput
                 name="upload-excel">
-              <button type="button" (click)="upLoadFile()" class="btn btn-block btn-success"><i
+              <button type="button" (click)="uploadFile()" class="btn btn-block btn-success"><i
                   class="fa fa-upload"></i> Upload
               </button>
             </div>
@@ -27,7 +27,7 @@
               <label class="badge badge-warning">To Time</label>
               <div class="input-group">
                 <input class="form-control" placeholder="End" [(ngModel)]="time_end" type="text" bsDatepicker
-                  [bsConfig]="{isAnimated:true, dateInputFormat: 'YYYY/MM/DD'}">
+                  [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY/MM/DD'}">
                 <span class="input-group-text">
                   <span class="fa fa-calendar"></span>
                 </span>
@@ -180,24 +180,24 @@
                     <th class="font-table">{{ item.issue_ZW }}</th>
                     <th class="font-table">{{ item.issue_EN }}</th>
                     <th class="hover01">
-                      <figure><img *ngIf="checkImage(item.before_Picture)" [src]="
+                      <figure><img *ngIf="chkImage(item.before_Picture)" [src]="
                       (item.before_Picture === null || item.before_Picture === '')
                         ? urlImage
                         : url + item.before_Picture
                     " width="100%" width="60" (click)="openImage(item.before_Picture)" /></figure>
-                      <video *ngIf="!checkImage(item.before_Picture)" width="100%" [src]="
+                      <video *ngIf="!chkImage(item.before_Picture)" width="100%" [src]="
                       (item.before_Picture === null || item.before_Picture === '')
                         ? urlImage
                         : url + item.before_Picture
                     " controls width="100"></video>
                     </th>
                     <th class="hover01">
-                      <figure><img *ngIf="checkImage(item.after_Picture)" [src]="
+                      <figure><img *ngIf="chkImage(item.after_Picture)" [src]="
                       (item.after_Picture === null || item.after_Picture === '')
                         ? urlImage
                         : url + item.after_Picture
                     " width="100%" width="60" (click)="openImage(item.after_Picture)" /></figure>
-                      <video *ngIf="!checkImage(item.after_Picture)" width="100%" [src]="
+                      <video *ngIf="!chkImage(item.after_Picture)" width="100%" [src]="
                       (item.after_Picture === null || item.after_Picture === '')
                         ? urlImage
                         : url + item.after_Picture
@@ -207,8 +207,7 @@
                     <th class="font-table">{{ item.pD_Department }}</th>
                     <th class="font-table">{{ item.mE_PIC_Name }}</th>
                     <th class="font-table">{{ item.finished_Date | date: "MM/dd/yyyy, HH:mm:ss" }}</th>
-                    <th class="font-table" style="background: red;color: white;"
-                      *ngIf="item.status.trim() === 'Not Feasible'">
+                    <th class="font-table" style="background: red;color: white;" *ngIf="item.status === 'Not Feasible'">
                       {{ item.status }}</th>
                     <th class="font-table" style="background: rgb(108, 180, 91);color: white;"
                       *ngIf="item.status === 'Implemented'">{{ item.status }}</th>
@@ -230,7 +229,7 @@
           </div>
           <div class="d-flex" *ngIf="pagination.totalPages > 1">
             <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
-              [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChange($event)" previousText="&lsaquo;"
+              [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
               nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]=5>
             </pagination>
           </div>

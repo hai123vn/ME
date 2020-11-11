@@ -69,6 +69,7 @@
     "ngx-datepicker-material": "^1.0.1",
     "ngx-perfect-scrollbar": "^9.0.0",
     "ngx-spinner": "^10.0.1",
+    "ngx-webcam": "^0.3.0",
     "rxjs": "^6.6.0",
     "select2": "^4.0.13",
     "simple-line-icons": "^2.5.5",

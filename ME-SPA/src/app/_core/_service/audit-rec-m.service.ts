@@ -44,7 +44,7 @@ export class AuditRecMService {
   }
 
   getListRecordID() {
-    return this.http.get<any>(this.baseUrl + 'auditRecM.recordIDs', {});
+    return this.http.get<any>(this.baseUrl + 'auditRecM/recordIDs', {});
   }
 
   getListBuilding() {

@@ -83,11 +83,11 @@ namespace ME_API.Controller
             return Ok(data);
         }
 
-        [HttpGet("create")]
+        [HttpPost("create")]
         public async Task<IActionResult> Create(AuditRecMViewModel model)
         {
-            var username = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            model.Updated_By = username;
+            // var username = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            model.Updated_By = "username";
             if (await _service.AddAuditRecM(model))
             {
                 return CreatedAtRoute("GetAllRecM", new { });

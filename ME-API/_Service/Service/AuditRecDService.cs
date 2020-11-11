@@ -74,7 +74,7 @@ namespace ME_API._Service.Service
                     After_Picture = z.x.After_Picture,
                     Audit_Item = z.x.Audit_Item,
                     Audit_Type_ID = z.x.Audit_Type_ID,
-                    Audit_Type = z.x.Audit_Type_ID == null || z.x.Audit_Type_ID == "" ? "" : _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type2,
+                    Audit_Type = (z.x == null || z.x.Audit_Type_ID == "") ? "" : _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type2,
                     Before_Picture = z.x.Before_Picture,
                     Finished_Date = z.x.Finished_Date,
                     ERCS = z.x.ERCS,
@@ -101,7 +101,7 @@ namespace ME_API._Service.Service
                     Item_no = z.x.Item_no,
                     Updated_By = z.x.Updated_By,
                     Updated_Time = z.x.Updated_Time,
-                });
+                }).OrderBy(x => x.Audit_Type_ID);
             return await PagedList<AuditRecDto>.CreateAsync(listAuditRecDto, param.PageNumber, param.PageSize);
         }
 
@@ -118,7 +118,7 @@ namespace ME_API._Service.Service
                                Record_Time = z.y.Record_Time,
                                Audit_Item = z.x.Audit_Item,
                                Audit_Type_ID = z.x.Audit_Type_ID,
-                               Audit_Type = z.x.Audit_Type_ID == null || z.x.Audit_Type_ID == "" ? "" : _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type2,
+                                  Audit_Type = (z.x == null || z.x.Audit_Type_ID == "") ? "" : _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type2,
                                Before_Picture = z.x.Before_Picture,
                                Finished_Date = z.x.Finished_Date,
                                ERCS = z.x.ERCS,
@@ -135,7 +135,8 @@ namespace ME_API._Service.Service
                                Model_Name = z.y.Model_Name,
                                Model_No = z.y.Model_No,
                                Updated_By = z.x.Updated_By,
-                               Updated_Time = z.y.Updated_Time
+                               Updated_Time = z.y.Updated_Time,
+                               Item_no = z.x.Item_no,
                            }).ToList();
             if (model.Status != "")
             {

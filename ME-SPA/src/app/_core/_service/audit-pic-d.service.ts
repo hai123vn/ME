@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AnyARecord } from 'dns';
 import { localeData } from 'moment';
 import { BehaviorSubject, observable, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -68,10 +69,10 @@ export class AuditPicDService {
   }
 
   getAllPdPic() {
-    return this.http.get(this.baseUrl + 'auditPicD/allPdPic', {});
+    return this.http.get<any>(this.baseUrl + 'auditPicD/allPdPic', {});
   }
   getAllMePic() {
-    return this.http.get(this.baseUrl + 'auditPicD/allMePic', {});
+    return this.http.get<any>(this.baseUrl + 'auditPicD/allMePic', {});
   }
   getPdPicByID(text: string) {
     return this.http.get(this.baseUrl + 'auditPicD/allPdPicByID/' + text, {});
@@ -83,12 +84,12 @@ export class AuditPicDService {
     return this.http.get(this.baseUrl + 'auditPicD/allBuildingByID/' + text, {});
   }
   getPdDepartment(text: any) {
-    const url = this.baseUrl + 'auditPicD/PdDepartment/' + text;
+    const url = this.baseUrl + 'auditPicD/getPdDepartment/' + text;
     return this.http.get<any>(url, {});
   }
 
   getPbBuilding(text: any) {
-    const url = this.baseUrl + 'auditPicD/getPdBuilding/' + text;
+    const url = this.baseUrl + 'auditPicD/getBuilding/' + text;
     return this.http.get<any>(url, {});
   }
 
