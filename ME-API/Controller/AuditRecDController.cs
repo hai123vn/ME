@@ -135,27 +135,52 @@ namespace ME_API.Controller
             auditRecDDto.Updated_By = username;
             auditRecDDto.Implement_User = username;
             string folder = _webHostEnvironmentl.WebRootPath + "\\uploaded\\images";
-            if (before == true)
+            try
             {
-                var source = auditRecDDto.Before_Picture;
-                string base64 = source.Substring(source.IndexOf(',') + 1);
-                base64 = base64.Trim('\0');
-                byte[] charData = Convert.FromBase64String(base64);
-                if (!Directory.Exists(folder))
+                if (before == true)
                 {
-                    Directory.CreateDirectory(folder);
+                    var source = auditRecDDto.Before_Picture;
+                    string base64 = source.Substring(source.IndexOf(',') + 1);
+                    base64 = base64.Trim('\0');
+                    byte[] charData = Convert.FromBase64String(base64);
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+                    var fileName = auditRecM.Record_ID + "_" + auditRecM.Line + "_" + auditRecM.Model_No + "_B4_" + auditRecDDto.Item_no + ".jpg";
+                    string filePathB4 = Path.Combine(folder, fileName);
+                    System.IO.File.WriteAllBytes(filePathB4, charData);
+                    auditRecDDto.Before_Picture = fileName;
                 }
-                var fileName = auditRecM.Record_ID + "_" + auditRecM.Line + "_" + auditRecM.Model_No + "_B4_" + auditRecDDto.Item_no + ".jpg";
-                string filePathB4 = Path.Combine(folder, fileName);
-                System.IO.File.WriteAllBytes(filePathB4, charData);
-                auditRecDDto.Before_Picture = fileName;
+                if (after == true)
+                {
+                    var source = auditRecDDto.After_Picture;
+                    string base64 = source.Substring(source.IndexOf(',') + 1);
+                    base64 = base64.Trim('\0');
+                    byte[] charData = Convert.FromBase64String(base64);
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+                    var fileName = auditRecM.Record_ID + "_" + auditRecM.Line + "_" + auditRecM.Model_No + "_After_" + auditRecDDto.Item_no + ".jpg";
+                    string filePathAfter = Path.Combine(folder, fileName);
+                    System.IO.File.WriteAllBytes(filePathAfter, charData);
+                    auditRecDDto.After_Picture = fileName;
+                }
+                if (await _service.UpdateRecD(auditRecDDto))
+                {
+                    return NoContent();
+                }
+
+                throw new Exception("Edit Audit Rec D failed on save");
             }
-            if (await _service.UpdateRecD(auditRecDDto))
+            catch (System.Exception ex)
             {
-                return NoContent();
+
+                throw ex;
             }
 
-            throw new Exception("Edit Audit Rec D failed on save");
+
 
         }
 

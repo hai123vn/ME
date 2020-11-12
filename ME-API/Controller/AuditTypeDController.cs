@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ME_API._Service.Interface;
 using ME_API.DTO;
@@ -93,8 +94,8 @@ namespace ME_API.Controller
                 auditTypeDto.Movie_Name = filenameB4;
             }
 
-            // var username = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            // auditTypeDto.Updated_By = username;
+            var username = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            auditTypeDto.Updated_By = username;
             auditTypeDto.Updated_Time = DateTime.Now;
             if (await _auditTypeDService.Add(auditTypeDto))
             {

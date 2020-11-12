@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(this.user).subscribe(
       next => {
+        console.log(this.user);
         this.alertify.success("Login Success !!");
         this.spinner.hide();
       },

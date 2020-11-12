@@ -200,6 +200,7 @@ namespace ME_API._Service.Service
         public async Task<bool> Update(AuditRecMDto model)
         {
             var auditRecM = _mapper.Map<MES_Audit_Rec_M>(model);
+            auditRecM.Updated_Time = DateTime.Now;
             _repoM.Update(auditRecM);
             return await _repoM.SaveAll();
         }

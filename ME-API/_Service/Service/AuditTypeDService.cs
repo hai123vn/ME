@@ -131,7 +131,7 @@ namespace ME_API._Service.Service
         {
             return await _repoauditTypeD.FindAll().ProjectTo<AuditType_D_Dto>(_configMapper)
             .Where(x => x.Audit_Type_ID.Trim() == auditTypeID.Trim())
-            .OrderByDescending(x => x.Updated_Time).Select(x => x.Audit_Type_ID).ToListAsync();
+            .OrderByDescending(x => x.Updated_Time).Select(x => x.Audit_Item_ID).ToListAsync();
         }
 
         public async Task<PagedList<AuditType_D_Dto>> SearchAuditTypeD(PaginationParams param, AuditTypeDParam auditTypeDParam)

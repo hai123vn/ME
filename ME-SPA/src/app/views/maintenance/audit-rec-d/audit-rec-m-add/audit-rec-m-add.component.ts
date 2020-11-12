@@ -78,11 +78,17 @@ export class AuditRecMAddComponent implements OnInit {
         attendees: this.auditRecM.attendees
       }
       this.auditRecMService.create(auditRecM).subscribe(() => {
-        debugger
         this.alertifyService.success("Add success !!");
         this.router.navigate(["/maintenance/audit-rec"]);
       }, error => {
         this.alertifyService.error("o((⊙﹏⊙))o.o((⊙﹏⊙))o.");
+      });
+    } else {
+      this.auditRecMService.update(this.auditRecM).subscribe(() => {
+        this.alertifyService.success("Update success !! ✔✔");
+        this.router.navigate(["/maintenance/audit-rec"]);
+      }, error => {
+        this.alertifyService.error("Update failed ❌❌");
       });
     }
   }
@@ -128,7 +134,6 @@ export class AuditRecMAddComponent implements OnInit {
     });
   }
   changeOptionModelNo() {
-    debugger
     if (this.auditRecM.model_No != null) {
       this.mesMoService.getModelName(this.auditRecM.model_No).subscribe((res) => {
         this.auditRecM.model_Name = res.dataResult;

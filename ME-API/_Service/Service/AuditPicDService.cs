@@ -45,8 +45,7 @@ namespace ME_API._Service.Service
 
         public async Task<bool> Delete(AuditPicDDto model)
         {
-            var modelFind = await _repo.FindAll(x => x.PIC_Type_ID.Trim() == model.PIC_Type_ID.Trim() &&
-                                                  x.Resp_ID.Trim() == model.Resp_ID.Trim()).FirstOrDefaultAsync();
+            var modelFind = await _repo.FindAll(x => x.PIC_Type_ID.Trim() == model.PIC_Type_ID.Trim() && x.Resp_ID.Trim() == model.Resp_ID.Trim()).FirstOrDefaultAsync();
             _repo.Remove(modelFind);
             return await _repo.SaveAll();
         }
@@ -136,18 +135,18 @@ namespace ME_API._Service.Service
 
         public async Task<PagedList<AuditPicDDto>> GetWithPaginations(PaginationParams param)
         {
-            var lists =  _repo.FindAll().ProjectTo<AuditPicDDto>(_config).OrderByDescending(x=>x.Updated_Time);
+            var lists = _repo.FindAll().ProjectTo<AuditPicDDto>(_config).OrderByDescending(x => x.Updated_Time);
             return await PagedList<AuditPicDDto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
 
         public async Task<PagedList<AuditPicDDto>> Search(PaginationParams param, object text)
         {
-            var lists = _repo.FindAll(x=>x.PIC_Type_ID.Contains(text.ToString())||
-                                        x.Resp_EN.Contains(text.ToString())||
-                                        x.Resp_ZW.Contains(text.ToString())||
-                                        x.Resp_LL.Contains(text.ToString())||
+            var lists = _repo.FindAll(x => x.PIC_Type_ID.Contains(text.ToString()) ||
+                                        x.Resp_EN.Contains(text.ToString()) ||
+                                        x.Resp_ZW.Contains(text.ToString()) ||
+                                        x.Resp_LL.Contains(text.ToString()) ||
                                         x.Updated_By.Contains(text.ToString())).ProjectTo<AuditPicDDto>(_config)
-                                        .OrderByDescending(x=>x.Updated_Time);
+                                        .OrderByDescending(x => x.Updated_Time);
             return await PagedList<AuditPicDDto>.CreateAsync(lists, param.PageNumber, param.PageSize);
         }
     }

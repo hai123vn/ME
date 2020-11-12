@@ -118,7 +118,7 @@ namespace ME_API._Service.Service
                                Record_Time = z.y.Record_Time,
                                Audit_Item = z.x.Audit_Item,
                                Audit_Type_ID = z.x.Audit_Type_ID,
-                                  Audit_Type = (z.x == null || z.x.Audit_Type_ID == "") ? "" : _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type2,
+                               Audit_Type = (z.x == null || z.x.Audit_Type_ID == "") ? "" : _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type1 + "-" + _repoAuditTypeM.FindById(z.x.Audit_Type_ID).Audit_Type2,
                                Before_Picture = z.x.Before_Picture,
                                Finished_Date = z.x.Finished_Date,
                                ERCS = z.x.ERCS,
@@ -136,6 +136,8 @@ namespace ME_API._Service.Service
                                Model_No = z.y.Model_No,
                                Updated_By = z.x.Updated_By,
                                Updated_Time = z.y.Updated_Time,
+                               Remark = z.x.Remark,
+                               Status = z.x.Status,
                                Item_no = z.x.Item_no,
                            }).ToList();
             if (model.Status != "")

@@ -98,7 +98,7 @@ export class AuditRecListComponent implements OnInit {
       .subscribe(
         (res: PaginationResult<AuditRecViewModel[]>) => {
           console.log(res);
-          debugger
+
           this.auditRecs = res.result;
           this.pagination = res.pagination;
         },
@@ -152,15 +152,17 @@ export class AuditRecListComponent implements OnInit {
   exportExcelWT() {
     this.checkTime();
     if (this.timeEnd == "" || this.timeStart == "") {
-      this.alertify.error("Please option Date !!!");
+      debugger
+      this.alertify.error("Please option Date ❕❕❕");
       return;
     }
     if (this.time_start > this.time_end || this.time_start < this.time_end) {
-      this.alertify.error("Please option in a Date !!!");
+      debugger
+      this.alertify.error("Please option in a Date ❗❗❗");
       return;
     }
     if (this.pdc === 'all' || this.pdc === null || this.pdc === undefined) {
-      this.alertify.error("Please option Department !!!");
+      this.alertify.error("Please option Department ??? ");
       return;
     }
     if (this.building === 'all' || this.building === null || this.building === undefined) {
@@ -291,7 +293,7 @@ export class AuditRecListComponent implements OnInit {
     this.router.navigate(["/maintenance/audit-rec/add-audit-recD"]);
   }
   pageChanged(event: any): void {
-    debugger
+
     this.pagination.currentPage = event.page;
     this.load();
   }
@@ -368,7 +370,7 @@ export class AuditRecListComponent implements OnInit {
         .getAuditRecDById(item.record_ID, item.item_no)
         .subscribe(
           (res) => {
-            debugger
+
             const auditRecD: any = res;
             this.auditRecDService.changeAuditRecD(auditRecD);
             this.auditRecDService.changeFlag("1");
@@ -407,7 +409,7 @@ export class AuditRecListComponent implements OnInit {
     }
   }
   openImage(image) {
-    debugger
+
     if (image != null && image != "") {
       window.open(this.url + image, '_blank');
     }

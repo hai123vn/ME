@@ -4,19 +4,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ME_API.Models
 {
-    public class MES_Audit_Rec_M
+    public class MES_Audit_Rate_M
     {
         /// <summary>
-        /// 紀錄編碼
+        /// 稽核評分ID
         /// </summary>
         [Key]
         [StringLength(15)]
         public string Record_ID { get; set; }
         /// <summary>
-        /// 紀錄時間
+        /// 稽核日期
         /// </summary>
         [Column(TypeName = "datetime")]
-        public DateTime Record_Time { get; set; }
+        public DateTime Record_Date { get; set; }
+        /// <summary>
+        /// 稽核類別1編碼
+        /// </summary>
+        [Required]
+        [StringLength(10)]
+        public string Audit_Type_ID { get; set; }
         /// <summary>
         /// 生產部
         /// </summary>
@@ -36,35 +42,35 @@ namespace ME_API.Models
         [StringLength(3)]
         public string Line { get; set; }
         /// <summary>
-        /// 型體名稱
+        /// 稽核種類(SME、6S、WS)
+        /// </summary>
+        [StringLength(100)]
+        public string Audit_Kind { get; set; }
+        /// <summary>
+        /// 稽核類別1
+        /// </summary>
+        [StringLength(100)]
+        public string Audit_Type1 { get; set; }
+        /// <summary>
+        /// 稽核類別2
+        /// </summary>
+        [StringLength(100)]
+        public string Audit_Type2 { get; set; }
+        /// <summary>
+        /// 稽查人員
         /// </summary>
         [Required]
-        [StringLength(150)]
-        public string Model_Name { get; set; }
+        [StringLength(50)]
+        public string ME_PIC { get; set; }
         /// <summary>
-        /// Model_No
-        /// </summary>
-        [Required]
-        [StringLength(15)]
-        public string Model_No { get; set; }
-        /// <summary>
-        /// 主席
+        /// 負責幹部
         /// </summary>
         [StringLength(50)]
-        public string Chief { get; set; }
-        /// <summary>
-        /// 紀錄
-        /// </summary>
-        [StringLength(50)]
-        public string Recorder { get; set; }
-        /// <summary>
-        /// 出席人員
-        /// </summary>
-        [StringLength(300)]
-        public string Attendees { get; set; }
+        public string PD_RESP { get; set; }
         /// <summary>
         /// 更新者
         /// </summary>
+        [Required]
         [StringLength(15)]
         public string Updated_By { get; set; }
         /// <summary>
@@ -72,5 +78,19 @@ namespace ME_API.Models
         /// </summary>
         [Column(TypeName = "datetime")]
         public DateTime? Updated_Time { get; set; }
+        /// <summary>
+        /// 停止生產
+        /// </summary>
+        public bool Halting_Production { get; set; }
+        /// <summary>
+        /// 型體名稱
+        /// </summary>
+        [StringLength(150)]
+        public string Model_Name { get; set; }
+        /// <summary>
+        /// Model_No
+        /// </summary>
+        [StringLength(15)]
+        public string Model_No { get; set; }
     }
 }

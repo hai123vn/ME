@@ -12,8 +12,7 @@ import { navItems } from '../../_nav';
 export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
-  currentUser: User = JSON.parse(localStorage.getItem('user'));
-
+  currentUser: any = JSON.parse(localStorage.getItem('user'));
 
   constructor(
     private authService: AuthService,
@@ -24,6 +23,11 @@ export class DefaultLayoutComponent {
   }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
+  }
+  
+  ngOnInit() : void {
+    debugger
+    this.currentUser;
   }
 
   logout() {

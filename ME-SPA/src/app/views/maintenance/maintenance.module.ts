@@ -29,6 +29,7 @@ import { MaintenanceRoutingModule } from './maintenance-routing.module';
 import { UserListComponent } from './user/user-list/user-list.component';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { WebcamModule } from 'ngx-webcam';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
     imports: [
@@ -41,6 +42,7 @@ import { WebcamModule } from 'ngx-webcam';
         ModalModule.forRoot(),
         BsDatepickerModule.forRoot(),
         WebcamModule,
+        BsDropdownModule
     ],
     declarations: [
         BrandListComponent,

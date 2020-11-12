@@ -88,7 +88,7 @@ export class AuditRecDAddComponent implements OnInit {
       this.auditRecD.finished_Date = this.auditRecD.finished_Date;
     }
     if (this.auditRecD.audit_Item !== undefined && this.auditRecD.audit_Item !== null) {
-      this.auditRecD.audit_Item = this.auditRecD.audit_Item;
+      this.auditRecD.audit_Item = this.auditRecD.audit_Item.trim();
     }
     if (this.flag == "0") {
       this.auditRecD.status = "Ongoing";
@@ -132,9 +132,7 @@ export class AuditRecDAddComponent implements OnInit {
         this.auditRecD.after_Picture = this.imgBase64After;
         after = true;
       }
-
       this.setAuditRecD();
-      this.router.navigate(["/maintenance/audit-rec"]);
       if (this.flag === "0") {
         console.log(".....>", this.auditRecD);
         this.auditRecDService.createAuditRecD(this.auditRecD).subscribe(() => {
@@ -142,6 +140,13 @@ export class AuditRecDAddComponent implements OnInit {
           this.router.navigate(["/maintenance/audit-rec"]);
         }, error => {
           this.alertifyService.error("┗|｀O′|┛ Add Failed ┗|｀O′|┛");
+        });
+      } else {
+        this.auditRecDService.update(this.auditRecD, before, after).subscribe(() => {
+          this.alertifyService.success("Update succes !!");
+          this.router.navigate(["/maintenance/audit-rec"]);
+        }, error => {
+          this.alertifyService.error("Update failed");
         });
       }
     }
@@ -208,6 +213,7 @@ export class AuditRecDAddComponent implements OnInit {
   }
 
   getListAuditTypeVersion() {
+    debugger
     this.auditTypeMService.getAlls().subscribe((data) => {
       this.auditType = data.map((item) => {
         return {
@@ -222,6 +228,7 @@ export class AuditRecDAddComponent implements OnInit {
   }
 
   optionAuditType(e) {
+    debugger
     if (this.auditRecD.audit_Type_ID != null && this.auditRecD.audit_Type_ID !== "") {
       this.auditTypeDService.searchauditItem(this.auditRecD.audit_Type_ID).subscribe((res) => {
         this.auditItems = res.map((item) => {
