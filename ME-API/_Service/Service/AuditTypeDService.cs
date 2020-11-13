@@ -52,6 +52,7 @@ namespace ME_API._Service.Service
         {
             var auditType = _mapper.Map<MES_Audit_Type_D>(model);
             auditType.Updated_Time = DateTime.Now;
+            _repoauditTypeD.Update(auditType);
             return await _repoauditTypeD.SaveAll();
         }
 

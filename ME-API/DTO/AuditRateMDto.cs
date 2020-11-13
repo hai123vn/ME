@@ -17,6 +17,7 @@ namespace ME_API.DTO
         public string PD_RESP { get; set; }
         public string Updated_By { get; set; }
         public DateTime? Updated_Time { get; set; }
+        public string Line_ID_2_Name { get; set; }
         public bool Halting_Production { get; set; }
         public string Model_Name { get; set; }
         public string Model_No { get; set; }

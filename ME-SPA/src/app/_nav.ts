@@ -45,5 +45,10 @@ export const navItems: INavData[] = [
     url: '/maintenance/audit-rec',
     icon: 'icon-eyeglass'
   },
+  {
+    name: 'SME Score Record',
+    url: '/maintenance/audit-rec',
+    icon: 'icon-eyeglass'
+  },
  
 ];

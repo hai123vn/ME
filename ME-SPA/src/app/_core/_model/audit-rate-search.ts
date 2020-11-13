@@ -1,4 +1,4 @@
-export interface AuditRecSearch {
+export interface AuditRateSearch {
     fromDate: string;
     toDate: string;
     pdc: string;

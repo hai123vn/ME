@@ -134,7 +134,7 @@ namespace ME_API.Controller
             auditType_D_Dto.Visible = Request.Form["visible"].ToBool();
             auditType_D_Dto.Movie_Name = Request.Form["movie_Name"];
             string folder = _webHostEnvironment.WebRootPath + "\\uploaded\\video";
-            string name = _auditTypeDService.GetNameVideoByID(auditType_D_Dto.Audit_Item_ID);
+            string name = _auditTypeDService.GetNameVideoByID(auditType_D_Dto.Audit_Type_ID);
             var file = filevideo;
             // kiem tra video co thay doi khong
             if (filevideo != null)

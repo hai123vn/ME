@@ -29,6 +29,7 @@ import { AuditTypeListComponent } from './audit-type/audit-type-list/audit-type-
 import { BrandAddComponent } from './brands/brand-add/brand-add.component';
 import { BrandListComponent } from './brands/brand-list/brand-list.component';
 import { BrandUpdateComponent } from './brands/brand-update/brand-update.component';
+import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 
 const routes: Routes = [
@@ -239,6 +240,18 @@ const routes: Routes = [
                         component: AuditRecDAddComponent,
                         data: {
                             title: 'Update new WT Tracking List'
+                        }
+                    },
+                ]
+            },
+            {
+                path: 'sme-score-record',
+                children: [
+                    {
+                        path: '',
+                        component: SmeScoreRecordListComponent,
+                        data: {
+                            title: 'SME Score Record'
                         }
                     },
                 ]

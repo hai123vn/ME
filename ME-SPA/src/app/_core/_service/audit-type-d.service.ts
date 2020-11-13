@@ -12,7 +12,7 @@ import { Pagination, PaginationResult } from '../_model/pagination';
 })
 export class AuditTypeDService {
   baseUrl = environment.apiUrl;
-  auditTypeDSource = new BehaviorSubject<Object>({});
+  auditTypeDSource = new BehaviorSubject<any>({});
   currentAuditTypeD = this.auditTypeDSource.asObservable();
   flagSource = new BehaviorSubject<string>('0');
   currentFlag = this.flagSource.asObservable();

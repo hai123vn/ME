@@ -45,5 +45,21 @@ namespace ME_API.Helpers
             var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PagedList<T>(items, count, pageNumber, pageSize);
         }
+
+        public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source,
+           int pageNumber, int pageSize, bool isPaging = true)
+        {
+            var count = await source.CountAsync();
+            if (isPaging)
+            {
+                var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+                return new PagedList<T>(items, count, pageNumber, pageSize);
+            }
+            else
+            {
+                var items = await source.ToListAsync();
+                return new PagedList<T>(items, count, pageNumber, pageSize);
+            }
+        }
     }
 }

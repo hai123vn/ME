@@ -30,6 +30,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { WebcamModule } from 'ngx-webcam';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
 
 @NgModule({
     imports: [
@@ -66,6 +67,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
         AuditRecListComponent,
         AuditRecMAddComponent,
         AuditRecMListComponent,
+        SmeScoreRecordListComponent,
     ],
     providers: [
         NgxSpinnerService,
