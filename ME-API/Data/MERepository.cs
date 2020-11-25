@@ -24,6 +24,11 @@ namespace ME_API.Data
             _context.AddRange(entities);
         }
 
+        public void UpdateMultiple(List<T> entities)
+        {
+            _context.UpdateRange(entities);
+        }
+        
         public IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> items = _context.Set<T>();

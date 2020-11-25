@@ -29,6 +29,8 @@ import { AuditTypeListComponent } from './audit-type/audit-type-list/audit-type-
 import { BrandAddComponent } from './brands/brand-add/brand-add.component';
 import { BrandListComponent } from './brands/brand-list/brand-list.component';
 import { BrandUpdateComponent } from './brands/brand-update/brand-update.component';
+import { SmeScoreRecordDetailComponent } from './sme-score-record/sme-score-record-detail/sme-score-record-detail.component';
+import { SmeScoreRecordEditComponent } from './sme-score-record/sme-score-record-edit/sme-score-record-edit.component';
 import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 
@@ -254,6 +256,20 @@ const routes: Routes = [
                             title: 'SME Score Record'
                         }
                     },
+                    {
+                        path: 'detail/:recordId',
+                        component: SmeScoreRecordDetailComponent,
+                        data: {
+                            title: 'SME Score Record Detail'
+                        }
+                    },
+                    {
+                        path: 'edit/:recordId',
+                        component: SmeScoreRecordEditComponent,
+                        data: {
+                            title: 'SME Score Record Edit'
+                        }
+                    }
                 ]
             }
         ]

@@ -98,7 +98,6 @@ export class AuditRecListComponent implements OnInit {
       .subscribe(
         (res: PaginationResult<AuditRecViewModel[]>) => {
           console.log(res);
-
           this.auditRecs = res.result;
           this.pagination = res.pagination;
         },
@@ -256,7 +255,7 @@ export class AuditRecListComponent implements OnInit {
       this.auditType2List = [];
       this.auditType2 = '';
     } else {
-      this.auditTypeMService.getAuditByAuditType1(ọbject).subscribe((res) => {
+      this.auditTypeMService.getAuditsByAuditType1(ọbject).subscribe((res) => {
         this.auditType2List = res.map((item) => {
           return { id: item.audit_Type2, text: item.audit_Type2 };
         });

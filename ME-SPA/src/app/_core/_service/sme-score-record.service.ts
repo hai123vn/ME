@@ -26,37 +26,45 @@ export class SmeScoreRecordService {
     private http: HttpClient
   ) { }
 
-  search(page?, itemPerPage?, auditRateSearch?: AuditRecSearch): Observable<PaginationResult<AuditRateSme[]>> {
-    const paginationResult: PaginationResult<AuditRateSme[]> = new PaginationResult<AuditRateSme[]>();
-    let params = new HttpParams
-    if (page != null && itemPerPage != null) {
-      params = params.append("pageNumber", page);
-      params = params.append("pageSize", itemPerPage)
+  search(page?, itemsPerPage?, auditRateSearch?: AuditRateSearch): Observable<PaginationResult<AuditRateSme[]>> {
+    const paginatedResult: PaginationResult<AuditRateSme[]> = new PaginationResult<AuditRateSme[]>();
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null) {
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
     }
     let url = this.baseUrl + 'SMERecord/sme-list';
     return this.http.post<any>(url, auditRateSearch, { observe: 'response', params })
       .pipe(
         map(response => {
-          paginationResult.result = response.body;
-          if (response.headers.get("Pagination") != null) {
-            paginationResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
           }
-          return paginationResult;
+          return paginatedResult;
         }),
       );
   }
 
   exportExcel(auditRateSearch?: AuditRateSearch) {
-    return this.http.post(this.baseUrl + 'SME/ExportExcelSME', auditRateSearch, { responseType: 'blob' }).subscribe((result: Blob) => {
-      if (result.type !== 'application/xlsx') {
-        alert(result.type);
-      }
-      const blob = new Blob([result]);
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      const currentTime = new Date();
-      const filename = 'Sme_Score_Record' + currentTime.getFullYear().toString() + (currentTime.getMonth() + 1) + currentTime.getDate() + currentTime.toLocaleDateString().replace(/[]|[,]|[:]/g, '').trim() + '.xlsx';
-    })
+    return this.http.post(this.baseUrl + 'SMERecord/ExportExcelSME', auditRateSearch, { responseType: 'blob' })
+      .subscribe((result: Blob) => {
+        if (result.type !== 'application/xlsx') {
+          alert(result.type);
+        }
+        const blob = new Blob([result]);
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const currentTime = new Date();
+        const filename = 'Sme_Score_Record' + currentTime.getFullYear().toString() +
+          (currentTime.getMonth() + 1) + currentTime.getDate() +
+          currentTime.toLocaleTimeString().replace(/[ ]|[,]|[:]/g, '').trim() + '.xlsx';
+        link.href = url;
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+      });
   }
 
   getQuestion(auditTypeId: string) {
@@ -70,7 +78,7 @@ export class SmeScoreRecordService {
   }
 
   getDetailScoreRecord(recordId: string) {
-    return this.http.get<ScoreRecordDetail[]>(this.baseUrl + 'AuditRate/detail/' + recordId);
+    return this.http.get<ScoreRecordDetail>(this.baseUrl + 'AuditRate/detail/' + recordId);
   }
 
   exportExcelDetail(recordId: string) {
@@ -113,7 +121,7 @@ export class SmeScoreRecordService {
     this.questionEditSMESource.next(questionEditSME);
   }
 
-  saveQuestionEditSME(questionEditSME: ScoreRecordQuestion) {
+  saveQuestionEditSME(questionEditSME: ScoreRecordQuestion[]) {
     return this.http.post(this.baseUrl + 'AuditRate/update-score-record-detail', questionEditSME);
   }
 }

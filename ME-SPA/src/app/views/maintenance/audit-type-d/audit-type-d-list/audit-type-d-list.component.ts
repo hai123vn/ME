@@ -121,7 +121,7 @@ export class AuditTypeDListComponent implements OnInit {
       audit_type_1: this.auditType1
     };
     if (this.auditType1 !== 'all') {
-      this.auditTypeService.getAuditByAuditType1(object).subscribe(res => {
+      this.auditTypeService.getAuditsByAuditType1(object).subscribe(res => {
         this.auditType2List = res.map(item => {
           return { id: item.audit_Type_2, text: item.audit_Type_2 };
         });

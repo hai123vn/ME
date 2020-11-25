@@ -88,7 +88,7 @@ export class AuditTypeService {
     return this.http.get<string[]>(this.baseUrl + 'auditType/allAuditType1', {});
   }
 
-  getAuditByAuditType1(auditType1: AuditType1): Observable<any> {
+  getAuditsByAuditType1(auditType1: AuditType1): Observable<any> {  
     let url = this.baseUrl + 'auditType/searchaudit';
     return this.http.post<AuditType1>(url, auditType1).pipe(shareReplay());
   }

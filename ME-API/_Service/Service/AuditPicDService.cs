@@ -99,25 +99,23 @@ namespace ME_API._Service.Service
 
         public async Task<string> GetMePicByID(string Resp_id)
         {
-            var data = await _repo.FindAll(x => x.Resp_ID == "1" && x.Status == "1" && x.Resp_ID == Resp_id).FirstOrDefaultAsync();
+            var data = await _repo.FindAll(x => x.PIC_Type_ID == "1" && x.Status == "1" && x.Resp_ID == Resp_id).FirstOrDefaultAsync();
             var Name = Resp_id;
             if (Name != null)
             {
                 Name = (data.Resp_ID + '_' + data.Resp_ZW + '_' + data.Resp_LL).ToString();
             }
-
             return Name;
         }
 
         public async Task<string> GetPdPicByID(string Resp_id)
         {
-            var data = await _repo.FindAll(x => x.Resp_ID == "2" && x.Status == "1" && x.Resp_ID == Resp_id).FirstOrDefaultAsync();
+            var data = await _repo.FindAll(x => x.PIC_Type_ID == "2" && x.Status == "1" && x.Resp_ID == Resp_id).FirstOrDefaultAsync();
             var Name = Resp_id;
-            if (Name != null)
+            if (data != null)
             {
                 Name = (data.Resp_ID + '_' + data.Resp_ZW + '_' + data.Resp_LL).ToString();
             }
-
             return Name;
         }
 

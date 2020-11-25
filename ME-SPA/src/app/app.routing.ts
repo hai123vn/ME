@@ -9,7 +9,7 @@ import { AuthGuard } from './_core/_guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: '/dashboard',
     pathMatch: 'full',
   },
   {
@@ -24,6 +24,11 @@ export const routes: Routes = [
       title: "Home"
     },
     children: [
+      {
+        path: "dashboard",
+        loadChildren: () =>
+          import("./views/dashboard/dashboard.module").then(m => m.DashboardModule)
+      },
       {
         path: "maintenance",
         loadChildren: () =>

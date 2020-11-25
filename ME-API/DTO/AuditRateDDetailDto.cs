@@ -15,7 +15,7 @@ namespace ME_API.DTO
         public int TypeDrating2 { get; set; }
         public int? RatingNA { get; set; }
         public string Remark { get; set; }
-        public string UplloadPicture { get; set; }
+        public string UploadPicture { get; set; }
         public string Rating
         {
             get

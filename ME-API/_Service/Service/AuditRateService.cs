@@ -111,7 +111,7 @@ namespace ME_API._Service.Service
                     Rating2 = x.Rating_2,
                     RatingNA = x.Rate_NA,
                     Remark = x.Remark,
-                    UplloadPicture = x.Upload_Picture,
+                    UploadPicture = x.Upload_Picture,
                     AuditItemLL = _repoTypeD.GetAuditItemLL(auditRateMModel.Audit_Type_ID, x.Audit_Item_ID),
                     AuditItemEN = _repoTypeD.GetAuditItemEN(auditRateMModel.Audit_Type_ID, x.Audit_Item_ID),
                     AuditItemZW = _repoTypeD.GetAuditItemZW(auditRateMModel.Audit_Type_ID, x.Audit_Item_ID),
@@ -197,7 +197,7 @@ namespace ME_API._Service.Service
                     data.Remark = item.Remark;
                     listData.Add(data);
                 }
-                _repoRateD.AddMultiple(listData);
+                _repoRateD.UpdateMultiple(listData);
                 return await _repoRateD.SaveAll();
             }
             else

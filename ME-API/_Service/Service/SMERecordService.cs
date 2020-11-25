@@ -61,9 +61,11 @@ namespace ME_API._Service.Service
 
         public async Task<PagedList<SMEScoreRecordDto>> GetListSMEScoreRecord(PaginationParams paginationParams, ScoreRecordParam scoreRecordParam, bool isPaging = true, bool? check = false)
         {
-            //SME la gia tri fix cung
-            var paramAuditTyepIdBySME = await _repoRateM.FindAll(x => x.Audit_Kind).Select(x => x.Audit_Type_ID).ToListAsync();
-            var queryAuditRateM = _repoRateM.FindAll(x => paramAuditTyepIdBySME.Contains(x.Audit_Type_ID));
+
+            // SME là giá trị fix cứng
+            var paramAuditTypeIdBySME = await _repoTypeM.FindAll(x => x.Audit_Kind == "SME").Select(x => x.Audit_Type_ID).ToListAsync();
+
+            var queryAuditRateM = _repoRateM.FindAll().Where(x => paramAuditTypeIdBySME.Contains(x.Audit_Type_ID));
             var queryAuditRateD = _repoRateD.FindAll();
             var listAuditMes = _repoMesAuditOrg.FindAll(x => x.Status == 1);
             if (scoreRecordParam.PDC != "")
@@ -88,14 +90,23 @@ namespace ME_API._Service.Service
             }
             if (scoreRecordParam.FromDate != "" && scoreRecordParam.ToDate != "")
             {
-                DateTime d1 = Convert.ToDateTime(scoreRecordParam.FromDate + "00:00:00");
-                DateTime d2 = Convert.ToDateTime(scoreRecordParam.ToDate + "23:59:59");
+                DateTime d1 = Convert.ToDateTime(scoreRecordParam.FromDate + " 00:00:00");
+                DateTime d2 = Convert.ToDateTime(scoreRecordParam.ToDate + " 23:59:59");
                 queryAuditRateM = queryAuditRateM.Where(x => x.Record_Date >= d1 && x.Record_Date <= d2);
             }
-
-            //Get module 1 & 3 => SME Chart Static 9/9/2020
+            try
+            {
+                
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+            //Get Module 1 & 3 =>SME Chart Static 9/8/2020
             if (check == true)
                 queryAuditRateM = queryAuditRateM.Where(x => x.Audit_Type2.Trim() == "Module1" || x.Audit_Type2.Trim() == "Module3");
+
             var data = queryAuditRateM.Join(listAuditMes, x => x.Line, t => t.Line_ID_2, (x, t) => new SMEScoreRecordDto
             {
                 RecordId = x.Record_ID,
@@ -111,10 +122,11 @@ namespace ME_API._Service.Service
                 Rating2 = queryAuditRateD.Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rating_2),
                 RatingNa = queryAuditRateD.Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rate_NA) == null ? 0 : queryAuditRateD.Where(y => y.Record_ID == x.Record_ID).Sum(z => z.Rate_NA),
                 CheckAnswerAllYet = queryAuditRateD.Where(y => y.Record_ID == x.Record_ID && y.Rate_NA == 0 && y.Rating_0 == 0 && y.Rating_1 == 0 && y.Rating_2 == 0).Count() > 0 ? false : true,
-                //Get data Static Chart
+                //Get data Static Chart 
                 PDC = x.PDC,
                 Building = x.Building
             }).OrderByDescending(x => x.UpdateTime);
+
             return await PagedList<SMEScoreRecordDto>.CreateAsync(data, paginationParams.PageNumber, paginationParams.PageSize, isPaging);
         }
     }

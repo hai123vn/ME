@@ -71,7 +71,7 @@ namespace ME_API.Controller
         [HttpGet("GetPdPicByID/{Resp_id}")]
         public async Task<IActionResult> GetPdPicByID(string Resp_id)
         {
-            var data = await _auditPicDService.GetMePicByID(Resp_id);
+            var data = await _auditPicDService.GetPdPicByID(Resp_id);
             return Ok(new { dataResult = data });
         }
 

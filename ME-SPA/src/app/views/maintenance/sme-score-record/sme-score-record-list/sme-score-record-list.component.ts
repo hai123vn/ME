@@ -48,70 +48,81 @@ export class SmeScoreRecordListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getListPDCs();
+    this.getListBuilding();
+    this.getListLine();
+    this.getAuditType1();
+    this.loadData();
   }
-
   loadData() {
     let object = {
       pdc: this.pdc === 'all' ? '' : this.pdc,
       building: this.building === 'all' ? '' : this.building,
       line: this.line === 'all' ? '' : this.line,
-      auditType2: this.auditType2,
+      auditType2: this.auditType2 === 'all' ? '':this.auditType2,
       auditType1: this.auditType1 === 'all' ? '' : this.auditType1,
       fromDate: this.fromTime,
       toDate: this.toTime,
     };
-    this.smeScoreRecordService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe(
-      (res: PaginationResult<AuditRateSme[]>) => {
-        this.auditRateSme = res.result;
-        this.pagination = res.pagination;
-      }, (error) => {
-        this.alertify.error("Error ❓❓❓");
-      }
-    );
+    this.smeScoreRecordService
+      .search(this.pagination.currentPage, this.pagination.itemsPerPage, object)
+      .subscribe(
+        (res: PaginationResult<AuditRateSme[]>) => {
+          console.log(res);
+          this.auditRateSme = res.result;
+          this.pagination = res.pagination;
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
   }
   getListPDCs() {
     this.mesOrgService.getAllPdc().subscribe((res) => {
       this.pdcList = res.map((item) => {
         return { id: item.id, text: item.name };
       });
+      this.pdcList.unshift({ id: "all", text: "All" });
     });
   }
-
   getListBuilding() {
     const pdc = this.pdc === 'all' ? '' : this.pdc;
     this.mesOrgService.getAllBuilding(pdc).subscribe((res) => {
       this.buildings = res.map((item) => {
         return { id: item.id, text: item.name };
       });
+      this.buildings.unshift({ id: "all", text: "All" });
+      this.getListLine();
     });
   }
-
   getListLine() {
     const pdc = this.pdc === 'all' ? '' : this.pdc;
     const building = this.building === 'all' ? '' : this.building;
-    this.mesOrgService.getAllLineId(pdc, building).subscribe((res) => {
-      this.lines = res.map((item) => {
-        return { id: item.id, text: item.name };
-      });
-    });
-  }
+    this.mesOrgService.getAllLineId(pdc, building)
+      .subscribe((res) => {
 
+        this.lines = res.map((item) => {
+          return { id: item.id, text: item.name };
+        });
+        this.lines.unshift({ id: "all", text: "All" });
+      });
+  }
   optionAuditType2() {
-    const object = {
+    const ọbject = {
       audit_type_1: this.auditType1,
     };
     if (this.auditType1 === "all") {
       this.auditType2List = [];
       this.auditType2 = '';
     } else {
-      this.auditTypeMService.getAuditByAuditType1(object).subscribe((res) => {
+      this.auditTypeMService.getAuditsByAuditType1(ọbject).subscribe((res) => {
         this.auditType2List = res.map((item) => {
-          return { id: item.id, text: item.name };
+          return { id: item.audit_Type2, text: item.audit_Type2 };
         });
+        this.auditType2 = this.auditType2List[0].id;
       });
     }
   }
-
   getAuditType1() {
     this.smeScoreRecordService.getAuditType1BySME().subscribe((res) => {
       this.auditType1s = res.map((item) => {
@@ -124,15 +135,19 @@ export class SmeScoreRecordListComponent implements OnInit {
   auditType1Change() {
     this.optionAuditType2();
   }
-
-  buildingChange() {
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadData();
+  }
+  pdcChange() {
+    this.getListBuilding();
+  }
+  buingdingChange() {
     this.getListLine();
   }
-
   addNew() {
     this.router.navigate(["/record/record-add/sms-scored-record-add"]);
   }
-
   search() {
     this.checkTime();
     this.pagination.currentPage = 1;
@@ -140,16 +155,17 @@ export class SmeScoreRecordListComponent implements OnInit {
   }
 
   detail(recordId) {
-    this.router.navigate(["maintenance/sme-score-record/detail" + recordId]);
+    this.router.navigate(["/maintenance/sme-score-record/detail/" + recordId]);
   }
 
   exportExcel() {
+    debugger
     this.checkTime();
     let object = {
       pdc: this.pdc === 'all' ? '' : this.pdc,
       building: this.building === 'all' ? '' : this.building,
       line: this.line === 'all' ? '' : this.line,
-      auditType2: this.auditType2,
+      auditType2: this.auditType2 === 'all' ? '':this.auditType2,
       auditType1: this.auditType1 === 'all' ? '' : this.auditType1,
       fromDate: this.fromTime,
       toDate: this.toTime,
@@ -163,10 +179,10 @@ export class SmeScoreRecordListComponent implements OnInit {
     this.line = "all";
     this.auditType1 = "all";
     this.auditType2 = '';
-    this.timeEnd = "all";
-    this.timeStart = "all";
-    this.fromTime = "all";
-    this.toTime = "all";
+    this.timeEnd = "";
+    this.timeStart = "";
+    this.fromTime = "";
+    this.toTime = "";
     this.loadData();
   }
 
@@ -181,7 +197,9 @@ export class SmeScoreRecordListComponent implements OnInit {
       this.toTime = "";
       this.fromTime = "";
     } else {
-      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.fromTime = this.functionUtility.getDateFormat(
+        new Date(this.timeStart)
+      );
       this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
     }
   }

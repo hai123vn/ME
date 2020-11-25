@@ -1,4 +1,4 @@
-export interface ScoreRecordQuestion {
+export class ScoreRecordQuestion {
     record_ID: string;
     audit_Type_ID: string;
     audit_Item_ID: string;

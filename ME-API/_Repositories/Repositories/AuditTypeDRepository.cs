@@ -15,33 +15,33 @@ namespace ME_API._Repositories.Repositories
 
         public string GetAuditItemEN(string auditTypeId, string auditItemId)
         {
-            return _context.MES_Audit_Type_D.Where(x=> x.Audit_Type_ID == auditItemId && x.Audit_Type_ID == auditItemId).FirstOrDefault().Audit_Item_EN;
+            return _context.MES_Audit_Type_D.Where(x=> x.Audit_Item_ID == auditItemId && x.Audit_Type_ID == auditTypeId).FirstOrDefault().Audit_Item_EN;
         }
 
         public string GetAuditItemLL(string auditTypeId, string auditItemId)
         {
-            return _context.MES_Audit_Type_D.Where(x=>x.Audit_Type_ID == auditItemId && x.Audit_Item_ID == auditItemId).FirstOrDefault().Audit_Item_LL;
+            return _context.MES_Audit_Type_D.Where(x=>x.Audit_Item_ID == auditItemId && x.Audit_Type_ID == auditTypeId).FirstOrDefault().Audit_Item_LL;
         }
 
         public string GetAuditItemZW(string auditTypeId, string auditItemId)
         {
-           return _context.MES_Audit_Type_D.Where(x=>x.Audit_Item_ID == auditItemId && x.Audit_Item_ID == auditItemId).FirstOrDefault().Audit_Item_ZW;
+           return _context.MES_Audit_Type_D.Where(x=>x.Audit_Item_ID == auditItemId && x.Audit_Type_ID == auditTypeId).FirstOrDefault().Audit_Item_ZW;
         }
 
         public int GetTypeDrating0(string auditTypeId, string auditItemId)
         {
-            return _context.MES_Audit_Type_D.Where(x=> x.Audit_Item_ID == auditItemId && x.Audit_Item_ID == auditItemId).FirstOrDefault().Rating_0;
+            return _context.MES_Audit_Type_D.Where(x=> x.Audit_Item_ID == auditItemId && x.Audit_Type_ID == auditTypeId).FirstOrDefault().Rating_0;
         }
 
         public int GetTypeDrating1(string auditTypeId, string auditItemId)
         {
-            return _context.MES_Audit_Type_D.Where(x=> x.Audit_Item_ID == auditItemId && x.Audit_Item_ID == auditItemId).FirstOrDefault().Rating_1;
+            return _context.MES_Audit_Type_D.Where(x=> x.Audit_Item_ID == auditItemId && x.Audit_Type_ID == auditTypeId).FirstOrDefault().Rating_1;
         }
         
 
         public int GetTypeDrating2(string auditTypeId, string auditItemId)
         {
-            return _context.MES_Audit_Type_D.Where(x=> x.Audit_Item_ID == auditItemId && x.Audit_Item_ID == auditItemId).FirstOrDefault().Rating_2;
+            return _context.MES_Audit_Type_D.Where(x=> x.Audit_Item_ID == auditItemId && x.Audit_Type_ID == auditTypeId).FirstOrDefault().Rating_2;
         }
         
 

@@ -24,14 +24,12 @@ export class DefaultLayoutComponent {
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
-  
-  ngOnInit() : void {
-    debugger
+
+  ngOnInit(): void {
     this.currentUser;
   }
 
   logout() {
-    debugger
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.authService.decodedToken = null;

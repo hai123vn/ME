@@ -99,11 +99,7 @@ export class AuditRecDService {
         })
       );
   }
-  search(
-    page?,
-    itemsPerPage?,
-    auditRecSearch?: AuditRecSearch
-  ): Observable<PaginationResult<AuditRecViewModel[]>> {
+  search(page?, itemsPerPage?, auditRecSearch?: AuditRecSearch): Observable<PaginationResult<AuditRecViewModel[]>> {
     const paginatedResult: PaginationResult<
       AuditRecViewModel[]
     > = new PaginationResult<AuditRecViewModel[]>();

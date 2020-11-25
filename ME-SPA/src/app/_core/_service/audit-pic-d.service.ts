@@ -75,13 +75,13 @@ export class AuditPicDService {
     return this.http.get<any>(this.baseUrl + 'auditPicD/allMePic', {});
   }
   getPdPicByID(text: string) {
-    return this.http.get(this.baseUrl + 'auditPicD/allPdPicByID/' + text, {});
+    return this.http.get<any>(this.baseUrl + 'auditPicD/GetPdPicByID/' + text, {});
   }
   getMePicByID(text: string) {
-    return this.http.get(this.baseUrl + 'auditPicD/allMePicByID/' + text, {});
+    return this.http.get<any>(this.baseUrl + 'auditPicD/GetMePicByID/' + text, {});
   }
   getBuildingByID(text: string) {
-    return this.http.get(this.baseUrl + 'auditPicD/allBuildingByID/' + text, {});
+    return this.http.get<any>(this.baseUrl + 'auditPicD/GetBuildingByID/' + text, {});
   }
   getPdDepartment(text: any) {
     const url = this.baseUrl + 'auditPicD/getPdDepartment/' + text;

@@ -31,6 +31,8 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { WebcamModule } from 'ngx-webcam';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
+import { SmeScoreRecordDetailComponent } from './sme-score-record/sme-score-record-detail/sme-score-record-detail.component';
+import { SmeScoreRecordEditComponent } from './sme-score-record/sme-score-record-edit/sme-score-record-edit.component';
 
 @NgModule({
     imports: [
@@ -68,6 +70,8 @@ import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record
         AuditRecMAddComponent,
         AuditRecMListComponent,
         SmeScoreRecordListComponent,
+        SmeScoreRecordDetailComponent,
+        SmeScoreRecordEditComponent
     ],
     providers: [
         NgxSpinnerService,

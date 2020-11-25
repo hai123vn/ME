@@ -1,6 +1,7 @@
 using ME_API.Models;
 using AutoMapper;
 using ME_API.DTO;
+using ME_API.ViewModel;
 
 namespace ME_API.Helpers.AutoMapper
 {
@@ -21,6 +22,7 @@ namespace ME_API.Helpers.AutoMapper
             CreateMap<AuditRecDDto, MES_Audit_Rec_D>();
             CreateMap<AuditRateDDto, MES_Audit_Rate_D>();
             CreateMap<AuditRateMDto, MES_Audit_Rate_M>();
+            CreateMap<AuditRecDViewModel, MES_Audit_Rec_D>();
         }
     }
 }
