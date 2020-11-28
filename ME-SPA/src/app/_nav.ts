@@ -50,5 +50,10 @@ export const navItems: INavData[] = [
     url: '/maintenance/sme-score-record',
     icon: 'icon-eyeglass'
   },
+  {
+    name: '6S Score Record',
+    url: '/maintenance/6s-score-record',
+    icon: 'icon-eyeglass'
+  }
  
 ];

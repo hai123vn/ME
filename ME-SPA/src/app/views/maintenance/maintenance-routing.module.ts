@@ -29,6 +29,9 @@ import { AuditTypeListComponent } from './audit-type/audit-type-list/audit-type-
 import { BrandAddComponent } from './brands/brand-add/brand-add.component';
 import { BrandListComponent } from './brands/brand-list/brand-list.component';
 import { BrandUpdateComponent } from './brands/brand-update/brand-update.component';
+import { SixsScoreRecordDetailComponent } from './sixs-score-record/sixs-score-record-detail/sixs-score-record-detail.component';
+import { SixsScoreRecordEditComponent } from './sixs-score-record/sixs-score-record-edit/sixs-score-record-edit.component';
+import { SixsScoreRecordListComponent } from './sixs-score-record/sixs-score-record-list/sixs-score-record-list.component';
 import { SmeScoreRecordDetailComponent } from './sme-score-record/sme-score-record-detail/sme-score-record-detail.component';
 import { SmeScoreRecordEditComponent } from './sme-score-record/sme-score-record-edit/sme-score-record-edit.component';
 import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
@@ -268,6 +271,32 @@ const routes: Routes = [
                         component: SmeScoreRecordEditComponent,
                         data: {
                             title: 'SME Score Record Edit'
+                        }
+                    }
+                ]
+            },
+            {
+                path: '6s-score-record',
+                children: [
+                    {
+                        path: '',
+                        component: SixsScoreRecordListComponent,
+                        data: {
+                            title: "6S Score Record"
+                        }
+                    },
+                    {
+                        path: 'detail',
+                        component: SixsScoreRecordDetailComponent,
+                        data: {
+                            title: "6S Score Record Detail"
+                        }
+                    },
+                    {
+                        path: 'edit',
+                        component: SixsScoreRecordEditComponent,
+                        data : {
+                            title: "6S Score Record Edit"
                         }
                     }
                 ]

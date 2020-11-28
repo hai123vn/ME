@@ -33,6 +33,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
 import { SmeScoreRecordDetailComponent } from './sme-score-record/sme-score-record-detail/sme-score-record-detail.component';
 import { SmeScoreRecordEditComponent } from './sme-score-record/sme-score-record-edit/sme-score-record-edit.component';
+import { SixsScoreRecordListComponent } from './sixs-score-record/sixs-score-record-list/sixs-score-record-list.component';
+import { SixsScoreRecordDetailComponent } from './sixs-score-record/sixs-score-record-detail/sixs-score-record-detail.component';
+import { SixsScoreRecordEditComponent } from './sixs-score-record/sixs-score-record-edit/sixs-score-record-edit.component';
 
 @NgModule({
     imports: [
@@ -71,7 +74,10 @@ import { SmeScoreRecordEditComponent } from './sme-score-record/sme-score-record
         AuditRecMListComponent,
         SmeScoreRecordListComponent,
         SmeScoreRecordDetailComponent,
-        SmeScoreRecordEditComponent
+        SmeScoreRecordEditComponent,
+        SixsScoreRecordListComponent,
+        SixsScoreRecordDetailComponent,
+        SixsScoreRecordEditComponent
     ],
     providers: [
         NgxSpinnerService,

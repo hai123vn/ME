@@ -93,6 +93,8 @@ namespace ME_API
             services.AddScoped<IAuditRateMService, AuditRateMService>();
             services.AddScoped<IAuditRateService, AuditRateService>();
             services.AddScoped<ISMERecordService, SMERecordService>();
+            services.AddScoped<ISixsRecordService, SixsRecordService>();
+            services.AddScoped<ISixsReportService, SixsReportService>();
 
             // Swagger
             services.AddSwaggerGen(c =>
