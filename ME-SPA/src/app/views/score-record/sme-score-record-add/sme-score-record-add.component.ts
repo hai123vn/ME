@@ -20,7 +20,7 @@ import { FunctionUtility } from '../../../_utility/function-utility';
 })
 export class SmeScoreRecordAddComponent implements OnInit {
   questions: ScoreRecordQuestion[] = [];
-  user: any = JSON.parse(localStorage.getItem("user"));
+  user: any = JSON.parse(localStorage.getItem('user'));
   lang: string = "EN";
   today: Date = new Date();
   recordDate: Date = new Date();
@@ -146,7 +146,6 @@ export class SmeScoreRecordAddComponent implements OnInit {
   }
 
   loadQuestion() {
-    debugger
     this.isChecked = false;
     this.smeScoreRecordService.getQuestion(this.auditTypeID).subscribe(res => {
       this.questions = res;
@@ -189,15 +188,17 @@ export class SmeScoreRecordAddComponent implements OnInit {
   }
 
   saveAll(check) {
+    debugger
     if (this.auditTypeID == "") {
       this.alertifyService.error("Please option auditType");
     } else {
+      debugger
       let auditRateM = new AuditRateM();
       auditRateM.pdc = this.pdc;
       auditRateM.building = this.building;
       auditRateM.line = this.lineID;
       auditRateM.audit_Type_ID = this.auditTypeID;
-      auditRateM.updated_By = this.user.id;
+      auditRateM.updated_By = this.user.user.id;
       auditRateM.mE_PIC = this.MEPIC;
       auditRateM.pD_RESP = this.PDRESP;
       auditRateM.model_Name = this.modelName;
