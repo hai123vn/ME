@@ -1,6 +1,19 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { routes } from '../../app.routing';
+import { RouterModule, Routes } from '@angular/router';
+import { SmeScoreRecordAddComponent } from './sme-score-record-add/sme-score-record-add.component';
+
+
+
+const routes: Routes = [
+    {
+        path: 'sms-scored-record-add',
+        component: SmeScoreRecordAddComponent
+    }
+]
+
+
+
+
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

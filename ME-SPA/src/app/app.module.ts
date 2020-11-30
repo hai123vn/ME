@@ -15,7 +15,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 import { AppComponent } from './app.component';
 
 // Import containers
-import { DefaultLayoutComponent } from './containers';
+import { DefaultLayoutComponent, ScopeRecordLayoutComponent } from './containers';
 import { AlertifyService } from './_core/_service/alertify.service';
 
 
@@ -101,11 +101,12 @@ import { AuditRecViewModelListResolver } from './_core/_resolver/audit-rec-viewm
         allowedDomains: ["localhost:5002"],
         disallowedRoutes: ["localhost: 5002/api/auth"]
       }
-    }), 
+    }),
   ],
   declarations: [
     AppComponent,
     LoginComponent,
+    ScopeRecordLayoutComponent,
     ...APP_CONTAINERS
   ],
 

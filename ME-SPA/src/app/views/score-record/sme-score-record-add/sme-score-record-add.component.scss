@@ -1,4 +1,5 @@
-.title-head {
+
+.title-head{
     text-transform: uppercase;
     text-align: center;
     font-weight: 600;
@@ -45,7 +46,7 @@
   
   /* When the radio button is checked, add a blue background */
   .container input:checked ~ .checkmark {
-    background-color: #2196f3;
+    background-color: #2196F3;
   }
   
   /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -62,22 +63,26 @@
   
   /* Style the indicator (dot/circle) */
   .container .checkmark:after {
-    top: 3.5px;
-    left: 3.5px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: white;
+       top: 3.5px;
+      left: 3.5px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: white;
   }
-  .remake {
-    width: 85%;
-    border-color: black !important;
+  .remake
+  {
+  width:85%;
+  border-color: black !important;
   }
-  .font-title {
+  .font-title
+  {
     text-align: center;
   }
   
-  .title-head {
+  
+  
+  .title-head{
     text-transform: uppercase;
     text-align: center;
     font-weight: 600;
@@ -124,7 +129,7 @@
   
   /* When the radio button is checked, add a blue background */
   .container input:checked ~ .checkmark {
-    background-color: #2196f3;
+    background-color: #2196F3;
   }
   
   /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -141,21 +146,25 @@
   
   /* Style the indicator (dot/circle) */
   .container .checkmark:after {
-    top: 3.5px;
-    left: 3.5px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: white;
+       top: 3.5px;
+      left: 3.5px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: white;
   }
-  .remake {
-    width: 85%;
+  .remake
+  {
+  width:85%;
   }
-  .font-title {
+  .font-title
+  {
     text-align: center;
   }
   
   button {
     margin-right: 5px;
   }
+  
+  
   

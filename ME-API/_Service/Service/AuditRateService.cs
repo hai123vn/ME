@@ -49,16 +49,18 @@ namespace ME_API._Service.Service
         public async Task<List<ScoreRecordQuesDto>> GetListQuesScoreRecord(string auditTypeId)
         {
             MES_Audit_Type_M auditType;
-            auditType = _repoTypeM.FindAll(x => x.Audit_Type_ID.Trim() == auditTypeId.Trim()).FirstOrDefault();
+            auditType = _repoTypeM.FindAll().Where(x => x.Audit_Type_ID.Trim() == auditTypeId.Trim()).FirstOrDefault();
+
             List<ScoreRecordQuesDto> data = new List<ScoreRecordQuesDto>();
 
             if (auditType != null)
             {
-                var queryAuditTypeD = _repoTypeD.FindAll(x => x.Audit_Item_ID.Trim() == auditType.Audit_Type_ID.Trim() && x.Visible == true);
-                data = await queryAuditTypeD.Select(x => new ScoreRecordQuesDto
+
+                var queryAudiiTypeD = _repoTypeD.FindAll().Where(x => x.Audit_Type_ID.Trim() == auditType.Audit_Type_ID.Trim() && x.Visible == true);
+                data = await queryAudiiTypeD.Select(x => new ScoreRecordQuesDto
                 {
+                    Audit_Type_ID = x.Audit_Type_ID,
                     Audit_Item_ID = x.Audit_Item_ID,
-                    Audit_Type_ID = x.Audit_Item_ID,
                     Quesion = x.Audit_Item_LL,
                     QuesionLL = x.Audit_Item_LL,
                     QuesionEN = x.Audit_Item_EN,

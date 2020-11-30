@@ -74,6 +74,7 @@ namespace ME_API
             services.AddScoped<IMesMoRepository, MesMoRepository>();
             services.AddScoped<IAuditRateDRepository, AuditRateDRepository>();
             services.AddScoped<IAuditRateMRepository, AuditRateMRepository>();
+            services.AddScoped<IVWMEAuditEOLRPPHRepository, VWMEAuditEOLRPPHRepository>();
 
             //Services
             services.AddScoped<IAuthService, AuthService>();
@@ -95,6 +96,8 @@ namespace ME_API
             services.AddScoped<ISMERecordService, SMERecordService>();
             services.AddScoped<ISixsRecordService, SixsRecordService>();
             services.AddScoped<ISixsReportService, SixsReportService>();
+            services.AddScoped<IVWMESAuditEOLRPPHService, VWMESAuditEOLRPPHService>();
+            services.AddScoped<IChartByMonthlyService, ChartByMonthlyService>();
 
             // Swagger
             services.AddSwaggerGen(c =>

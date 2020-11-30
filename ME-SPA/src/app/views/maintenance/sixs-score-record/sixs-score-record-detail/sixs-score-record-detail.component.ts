@@ -46,20 +46,31 @@ export class SixsScoreRecordDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.scoreRecordService.currentRecordId.subscribe((recordId) => (this.recordId = recordId));
+    this.loadData();
   }
   loadData() {
-    // this.scoreRecordService.getDetailScoreRecord(this.recordId).subscribe(
-    //   (res) => {
-    //     this.auditRateM = res.auditRateM;
-    //     this.listAuditRateD = res.listAuditRateD;
-    //     this.g
-    //   }
-    // )
+    this.scoreRecordService.getDetailScoreRecord(this.recordId).subscribe(
+      (res) => {
+        this.auditRateM = res.auditRateM;
+        this.listAuditRateD = res.listAuditRateD;
+        this.getMEPIC(this.auditRateM.mE_PIC);
+        this.getPDRESP(this.auditRateM.pD_RESP);
+        this.getBuilding(this.auditRateM.building);
+      }, error => {
+        this.alertifyService.error("Error ❗❗❗");
+      }
+    )
   }
   getMEPIC(mE_PIC) {
     this.auditPicDService.getMePicByID(mE_PIC).subscribe(res => {
       this.mePic = res.dataResult;
     });
+  }
+  getPDRESP(pD_RESP) {
+    this.auditPicDService.getPdPicByID(pD_RESP).subscribe(res => {
+      this.pdResp = res.dataResult;
+    })
   }
   getBuilding(building) {
     this.auditPicDService.getBuildingByID(building).subscribe(res => {
@@ -121,7 +132,7 @@ export class SixsScoreRecordDetailComponent implements OnInit {
     }
   }
   back() {
-    this.router.navigate(["maintanance/6s-score-record"]);
+    this.router.navigate(["maintenance/6s-score-record"]);
   }
 
   checkImage(uploadPicture) {

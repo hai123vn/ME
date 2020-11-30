@@ -21,6 +21,7 @@ namespace ME_API.Data
         public DbSet<MES_Audit_Rec_D> MES_Audit_Rec_D { get; set; }
         public DbSet<MES_Audit_Rate_D> MES_Audit_Rate_D { get; set; }
         public DbSet<MES_Audit_Rate_M> MES_Audit_Rate_M { get; set; }
+        public DbSet<VW_MES_Audit_EOLR_PPH> VW_MES_Audit_EOLR_PPH { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MES_Audit_Type_D>().HasKey(x => new { x.Audit_Type_ID, x.Audit_Item_ID });
@@ -35,6 +36,7 @@ namespace ME_API.Data
             modelBuilder.Entity<MES_Audit_Rec_D>().HasKey(x => new { x.Record_ID, x.Item_no });
             modelBuilder.Entity<MES_Audit_Rate_M>().HasKey(x => new { x.Record_ID });
             modelBuilder.Entity<MES_Audit_Rate_D>().HasKey(x => new { x.Record_ID, x.Audit_Item_ID });
+            modelBuilder.Entity<VW_MES_Audit_EOLR_PPH>().HasNoKey();
         }
     }
 }

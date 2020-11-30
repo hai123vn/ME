@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { AuditRateSearch } from '../_model/audit-rate-search';
 import { AuditRateSme } from '../_model/audit-rate-sme';
 import { AuditRecSearch } from '../_model/audit-rec-search';
+import { AuditType } from '../_model/audit-type';
 import { PaginationResult } from '../_model/pagination';
 import { ScoreRecordDetail } from '../_model/score-record-detail';
 import { AuditRateModel, ScoreRecordQuestion } from '../_model/score-record-question';
@@ -108,7 +109,7 @@ export class SmeScoreRecordService {
   }
 
   getAuditTypeByBrandBySME(brand: string) {
-    return this.http.get<string[]>(this.baseUrl + 'SMERecord/getaudittypebybrandbysme', {
+    return this.http.get<AuditType[]>(this.baseUrl + 'SMERecord/getaudittypebybrandbysme', {
       params: { brand: brand }
     });
   }

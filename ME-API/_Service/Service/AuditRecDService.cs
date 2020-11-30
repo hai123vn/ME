@@ -319,8 +319,8 @@ namespace ME_API._Service.Service
             DateTime now = DateTime.Now;
             var startDate = new DateTime(now.Year, now.Month, 1);
             var endDate = startDate.AddMonths(1).AddDays(-1);
-            DateTime d1 = Convert.ToDateTime(startDate.ToString("yyyy/MM/dd") + "00:00:00");
-            DateTime d2 = Convert.ToDateTime(endDate.ToString("yyyy/MM/dd") + "23:59:59");
+            DateTime d1 = Convert.ToDateTime(startDate.ToString("yyyy/MM/dd") + " 00:00:00");
+            DateTime d2 = Convert.ToDateTime(endDate.ToString("yyyy/MM/dd") + " 23:59:59");
             var data = await _repoD.FindAll(x => x.Updated_Time >= d1 && x.Updated_Time <= d2).GroupBy(x => x.Status).Select(x => new ImproveProjectDto
             {
                 Status = x.Key,

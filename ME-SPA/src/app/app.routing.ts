@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ScopeRecordLayoutComponent } from './containers';
+import { DefaultLayoutComponent } from './containers/default-layout';
 
 // Import Containers
-import { DefaultLayoutComponent } from './containers';
 import { LoginComponent } from './views/login/login.component';
 import { AuthGuard } from './_core/_guards/auth.guard';
 
@@ -36,6 +37,22 @@ export const routes: Routes = [
             m => m.MaintenanceModule
           )
       },
+      {
+        path: "record",
+        component: ScopeRecordLayoutComponent,
+        data: {
+          title: "Record Page"
+        },
+        children: [
+          {
+            path: 'record-add',
+            loadChildren: () =>
+              import("./views/score-record/score-record.module").then(
+                m => m.ScoreRecordModule
+              )
+          }
+        ]
+      }
     ]
   },
 ];
