@@ -9,6 +9,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ScoreRecordRoutingModulle } from './score-record-routing.module';
 import { NgSelect2Module } from 'ng-select2';
 import { SmeScoreRecordAddComponent } from './sme-score-record-add/sme-score-record-add.component';
+import { SixsScoreRecordAddComponent } from './sixs-score-record-add/sixs-score-record-add.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SmeScoreRecordAddComponent } from './sme-score-record-add/sme-score-rec
         BsDatepickerModule.forRoot(),
     ],
     declarations: [
-        SmeScoreRecordAddComponent
+        SmeScoreRecordAddComponent,
+        SixsScoreRecordAddComponent
     ],
 })
 

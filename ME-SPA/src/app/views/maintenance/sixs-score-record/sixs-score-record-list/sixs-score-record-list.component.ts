@@ -142,7 +142,7 @@ export class SixsScoreRecordListComponent implements OnInit {
     this.getListLine();
   }
   addNew() {
-    this.router.navigate(["/record/record-add/6s-scored-record-add"]);
+    this.router.navigate(["/record/record-add/6s-score-record-add"]);
   }
   search() {
     this.checkTime();

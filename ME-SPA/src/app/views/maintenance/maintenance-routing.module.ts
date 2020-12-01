@@ -36,6 +36,8 @@ import { SmeScoreRecordDetailComponent } from './sme-score-record/sme-score-reco
 import { SmeScoreRecordEditComponent } from './sme-score-record/sme-score-record-edit/sme-score-record-edit.component';
 import { SmeScoreRecordListComponent } from './sme-score-record/sme-score-record-list/sme-score-record-list.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { WaterSpiderScoreRecordDetailComponent } from './water-spider-score-record/water-spider-score-record-detail/water-spider-score-record-detail.component';
+import { WaterSpiderScoreRecordListComponent } from './water-spider-score-record/water-spider-score-record-list/water-spider-score-record-list.component';
 
 const routes: Routes = [
     {
@@ -295,8 +297,27 @@ const routes: Routes = [
                     {
                         path: 'edit',
                         component: SixsScoreRecordEditComponent,
-                        data : {
+                        data: {
                             title: "6S Score Record Edit"
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'water-spider-score-record',
+                children: [
+                    {
+                        path: '',
+                        component: WaterSpiderScoreRecordListComponent,
+                        data: {
+                            title: "Water Spider Score Record"
+                        }
+                    },
+                    {
+                        path: 'detail/:recordId',
+                        component: WaterSpiderScoreRecordDetailComponent,
+                        data:{
+                            title: 'Water Spider Score Record Detail'
                         }
                     }
                 ]

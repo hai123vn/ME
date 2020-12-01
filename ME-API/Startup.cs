@@ -98,6 +98,8 @@ namespace ME_API
             services.AddScoped<ISixsReportService, SixsReportService>();
             services.AddScoped<IVWMESAuditEOLRPPHService, VWMESAuditEOLRPPHService>();
             services.AddScoped<IChartByMonthlyService, ChartByMonthlyService>();
+            services.AddScoped<IWaterSpiderRecordService, WaterSpiderRecordService>();
+            services.AddScoped<IWaterSpiderReportService, WaterSpiderReportService>();
 
             // Swagger
             services.AddSwaggerGen(c =>

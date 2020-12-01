@@ -36,6 +36,8 @@ import { SmeScoreRecordEditComponent } from './sme-score-record/sme-score-record
 import { SixsScoreRecordListComponent } from './sixs-score-record/sixs-score-record-list/sixs-score-record-list.component';
 import { SixsScoreRecordDetailComponent } from './sixs-score-record/sixs-score-record-detail/sixs-score-record-detail.component';
 import { SixsScoreRecordEditComponent } from './sixs-score-record/sixs-score-record-edit/sixs-score-record-edit.component';
+import { WaterSpiderScoreRecordListComponent } from './water-spider-score-record/water-spider-score-record-list/water-spider-score-record-list.component';
+import { WaterSpiderScoreRecordDetailComponent } from './water-spider-score-record/water-spider-score-record-detail/water-spider-score-record-detail.component';
 
 @NgModule({
     imports: [
@@ -77,7 +79,9 @@ import { SixsScoreRecordEditComponent } from './sixs-score-record/sixs-score-rec
         SmeScoreRecordEditComponent,
         SixsScoreRecordListComponent,
         SixsScoreRecordDetailComponent,
-        SixsScoreRecordEditComponent
+        SixsScoreRecordEditComponent,
+        WaterSpiderScoreRecordListComponent,
+        WaterSpiderScoreRecordDetailComponent,
     ],
     providers: [
         NgxSpinnerService,
