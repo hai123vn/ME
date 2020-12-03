@@ -316,11 +316,16 @@ const routes: Routes = [
                     {
                         path: 'detail/:recordId',
                         component: WaterSpiderScoreRecordDetailComponent,
-                        data:{
+                        data: {
                             title: 'Water Spider Score Record Detail'
                         }
                     }
                 ]
+            },
+            {
+                path: 'report',
+                loadChildren: () =>
+                    import('./report/report.module').then(m => m.ReportModule)
             }
         ]
     }

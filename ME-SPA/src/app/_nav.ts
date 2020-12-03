@@ -1,4 +1,5 @@
 import { INavData } from '@coreui/angular';
+import { url } from 'inspector';
 
 export const navItems: INavData[] = [
   {
@@ -11,7 +12,7 @@ export const navItems: INavData[] = [
     }
   },
   {
-    name:'User',
+    name: 'User',
     url: "/maintenance/user",
     icon: 'icon-user'
   },
@@ -59,6 +60,28 @@ export const navItems: INavData[] = [
     name: 'Water Spider Score Record',
     url: '/maintenance/water-spider-score-record',
     icon: 'icon-eyeglass'
+  },
+  {
+    name: 'Report',
+    icon: 'icon-chart',
+    children: [
+      {
+        name: 'WT Tracking List Report',
+        url: '/',
+      },
+      {
+        name: 'SME Score Record Report',
+        url: '/maintenance/report/sme-score-report',
+      },
+      {
+        name: '6S Score Record Report',
+        url: '/'
+      },
+      {
+        name: 'Water Spider Score Record Report',
+        url: '/'
+      }
+    ]
   }
- 
+
 ];

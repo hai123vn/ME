@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SixsScoreRecordAddComponent } from './sixs-score-record-add/sixs-score-record-add.component';
 import { SmeScoreRecordAddComponent } from './sme-score-record-add/sme-score-record-add.component';
+import { WaterSpiderScoreRecordAddComponent } from './water-spider-score-record-add/water-spider-score-record-add.component';
 
 
 
@@ -13,13 +14,12 @@ const routes: Routes = [
     {
         path: '6s-score-record-add',
         component: SixsScoreRecordAddComponent
+    },
+    {
+        path: 'water-spider-score-record-add',
+        component: WaterSpiderScoreRecordAddComponent
     }
 ]
-
-
-
-
-
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]

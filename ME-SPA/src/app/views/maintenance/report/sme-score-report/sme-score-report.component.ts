@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Select2OptionData } from 'ng-select2';
+import { threadId } from 'worker_threads';
+import { AuditRateSme } from '../../../../_core/_model/audit-rate-sme';
 import { Pagination, PaginationResult } from '../../../../_core/_model/pagination';
-import { AuditRateWaterSpider } from '../../../../_core/_model/water-spider-score-record';
 import { AlertifyService } from '../../../../_core/_service/alertify.service';
 import { AuditTypeService } from '../../../../_core/_service/audit-type.service';
 import { MesOrgService } from '../../../../_core/_service/mes-org.service';
-import { WaterSpidetScoreRecordService } from '../../../../_core/_service/water-spidet-score-record.service';
+import { SmeScoreReportService } from '../../../../_core/_service/sme-score-report.service';
 import { FunctionUtility } from '../../../../_utility/function-utility';
 
 @Component({
-  selector: 'app-water-spider-score-record-list',
-  templateUrl: './water-spider-score-record-list.component.html',
-  styleUrls: ['./water-spider-score-record-list.component.scss']
+  selector: 'app-sme-score-report',
+  templateUrl: './sme-score-report.component.html',
+  styleUrls: ['./sme-score-report.component.scss']
 })
-export class WaterSpiderScoreRecordListComponent implements OnInit {
+export class SmeScoreReportComponent implements OnInit {
   pagination: Pagination = {
     currentPage: 1,
     itemsPerPage: 10,
     totalItems: 1,
-    totalPages: 1
+    totalPages: 1,
   };
+
   timeStart: string = "";
   timeEnd: string = "";
   fromTime: string = "";
@@ -28,27 +29,51 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
   pdc: string = "all";
   line: string = "all";
   building: string = "all";
+  auditType2: string = "";
   pdcList: Array<Select2OptionData>;
   lines: Array<Select2OptionData>;
   buildings: Array<Select2OptionData>;
-  auditRateWaterSpider: AuditRateWaterSpider[] = [];
   auditType2List: Array<Select2OptionData>;
-  auditType2: string = "";
+  auditRateSme: AuditRateSme[] = [];
+  searchKey = false;
+  text: string;
   auditType1s: Array<Select2OptionData>;
-  auditType1: string = 'all';
+  auditType1: string = "all";
   constructor(
-    private mesOrgService: MesOrgService,
-    private router: Router,
-    private waterSpiderService: WaterSpidetScoreRecordService,
+    private smeScoreReportService: SmeScoreReportService,
     private alertifyService: AlertifyService,
     private functionUtility: FunctionUtility,
+    private mesOrgService: MesOrgService,
     private auditTypeMService: AuditTypeService
   ) { }
 
   ngOnInit() {
     this.getListPDCs();
+    this.getListBuilding();
+    this.getListLine();
     this.getAuditType1();
     this.loadData();
+  }
+
+  loadData() {
+  
+    let object = {
+      pdc: this.pdc === 'all' ? '' : this.pdc,
+      building: this.building === 'all' ? '' : this.building,
+      line: this.line === 'all' ? '' : this.line,
+      auditType2: this.auditType2,
+      auditTyepe1: this.auditType1 === 'all' ? '' : this.auditType1,
+      fromDate: this.fromTime,
+      toDate: this.toTime
+    }
+    this.smeScoreReportService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe((res: PaginationResult<AuditRateSme[]>) => {
+    
+      console.log(res);
+      this.auditRateSme = res.result;
+      this.pagination = res.pagination;
+    }, error => {
+      this.alertifyService.error(error);
+    });
   }
 
   getListPDCs() {
@@ -56,9 +81,8 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       this.pdcList = res.map(item => {
         return { id: item.id, text: item.name };
       });
-      this.pdcList.unshift({id: "all", text: "All"});
-      this.getListBuilding();
-    })
+      this.pdcList.unshift({ id: "all", text: "All" });
+    });
   }
   getListBuilding() {
     const pdc = this.pdc === 'all' ? '' : this.pdc;
@@ -66,6 +90,9 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
       this.buildings = res.map(item => {
         return { id: item.id, text: item.name };
       });
+      this.buildings.unshift({ id: "all", text: "All" });
+      this.building = this.buildings[0].id;
+      this.getListLine();
     });
   }
 
@@ -73,25 +100,13 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
     const pdc = this.pdc === 'all' ? '' : this.pdc;
     const building = this.building === 'all' ? '' : this.building;
     this.mesOrgService.getAllLineId(pdc, building).subscribe(res => {
+      debugger
       this.lines = res.map(item => {
         return { id: item.id, text: item.name };
       });
       this.lines.unshift({ id: "all", text: "All" });
     });
-  }
-  pageChanged(event: any): void {
-    this.pagination.currentPage = event.page;
-    this.loadData();
-  }
 
-  auditType1Change() {
-    this.optionAuditType2();
-  }
-  pdcChange() {
-    this.getListBuilding();
-  }
-  buingdingChange() {
-    this.getListLine();
   }
 
   optionAuditType2() {
@@ -112,86 +127,71 @@ export class WaterSpiderScoreRecordListComponent implements OnInit {
   }
 
   getAuditType1() {
-    this.waterSpiderService.getAuditType1ByWaterSpider().subscribe((res) => {
-      this.auditType1s = res.map((item) => {
+    this.smeScoreReportService.getAuditType1BySME().subscribe(res => {
+      this.auditType1s = res.map(item => {
         return { id: item, text: item };
       });
       this.auditType1s.unshift({ id: "all", text: "All" });
-    });
-  }
-
-  addNew() {
-    this.router.navigate(["/record/record-add/water-spider-score-record-add"]);
-  }
-  loadData() {
-    let object = {
-      pdc: this.pdc === 'all' ? '' : this.pdc,
-      building: this.building === 'all' ? '' : this.building,
-      line: this.line === 'all' ? '' : this.line,
-      fromDate: this.fromTime,
-      toDate: this.toTime,
-      auditType2: this.auditType2,
-      auditType1: this.auditType1 === 'all' ? '' : this.auditType1
-    };
-    this.waterSpiderService.search(this.pagination.currentPage, this.pagination.itemsPerPage, object).subscribe((res: PaginationResult<AuditRateWaterSpider[]>) => {
-      this.auditRateWaterSpider = res.result;
-      this.pagination = res.pagination;
-    }, error => {
-      this.alertifyService.error("Error Search !!!");
     })
   }
 
+  auditType1Change() {
+    this.optionAuditType2();
+  }
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadData();
+  }
+  pdcChange() {
+    this.getListBuilding();
+  }
+  buingdingChange() {
+    this.getListLine();
+  }
   search() {
     this.checkTime();
     this.pagination.currentPage = 1;
     this.loadData();
   }
-
   exportExcel() {
     this.checkTime();
     let object = {
       pdc: this.pdc === 'all' ? '' : this.pdc,
       building: this.building === 'all' ? '' : this.building,
       line: this.line === 'all' ? '' : this.line,
-      fromDate: this.fromTime,
-      toDate: this.toTime,
       auditType2: this.auditType2,
-      auditType1: this.auditType1 === 'all' ? '' : this.auditType1
+      auditType1: this.auditType1 === 'all' ? '' : this.auditType1,
+      fromDate: this.fromTime,
+      toDate: this.toTime
     };
-    this.waterSpiderService.exportExcel(object);
+    this.smeScoreReportService.exportExcel(object);
   }
-  detail(recordId: string) {
-    this.router.navigate(["/maintenance/water-spider-score-record/detail", recordId]);
+  exportExcelDetail(item) {
+    this.smeScoreReportService.exportExcelDetail(item.recordId);
   }
-
   clearSearch() {
     this.pdc = "all";
     this.building = "all";
     this.line = "all";
+    this.auditType1 = "all";
+    this.auditType2 = '';
     this.timeEnd = "";
     this.timeStart = "";
     this.fromTime = "";
     this.toTime = "";
-    this.auditType1 = 'all';
-    this.auditType2 = '';
     this.loadData();
   }
-
   checkTime() {
-    if (
-      this.timeStart === "" ||
+    if (this.timeStart === "" ||
       this.timeEnd === "" ||
       this.timeStart === null ||
       this.timeEnd === null ||
-      new Date(this.timeStart).getTime() > new Date(this.timeEnd).getTime()
-    ) {
+      new Date(this.timeStart).getTime() > new Date(this.timeEnd).getTime()) {
       this.toTime = "";
       this.fromTime = "";
     } else {
-      this.fromTime = this.functionUtility.getDateFormat(
-        new Date(this.timeStart)
-      );
-      this.toTime = this.functionUtility.getDateFormat(new Date(this.timeEnd));
+      this.fromTime = this.functionUtility.getDateFormat(new Date(this.timeStart));
+      this.toTime = this.functionUtility.getDateFormat(new Date(this.toTime));
     }
   }
 }

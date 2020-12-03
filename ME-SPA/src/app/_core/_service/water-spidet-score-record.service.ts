@@ -80,7 +80,7 @@ export class WaterSpidetScoreRecordService {
     return this.http.get<string[]>(this.baseUrl + 'WaterSpiderRecord/getbrandbywaterspider');
   }
   getAuditTypeByBrandByWaterSpider(brand: string) {
-    return this.http.get<AuditType[]>(this.baseUrl + 'WaterSpiderRecord/getaudittypebybrandbywaterspider', { params: { brand: brand } });
+    return this.http.get<AuditType[]>(this.baseUrl + 'WaterSpiderRecord/getaudittypebybrandwaterspider', { params: { brand: brand } });
   }
   getAuditType1ByWaterSpider() {
     return this.http.get<string[]>(this.baseUrl + 'WaterSpiderRecord/getaudittype1bywaterspider');
