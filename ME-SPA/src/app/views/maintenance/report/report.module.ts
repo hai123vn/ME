@@ -10,6 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgSelect2Module } from 'ng-select2';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SmeScoreReportComponent } from './sme-score-report/sme-score-report.component';
+import { SixsScoreReportComponent } from './sixs-score-report/sixs-score-report.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { SmeScoreReportComponent } from './sme-score-report/sme-score-report.com
     BsDatepickerModule.forRoot(),
   ],
   declarations: [
-    SmeScoreReportComponent
+    SmeScoreReportComponent,
+    SixsScoreReportComponent
   ]
 })
 export class ReportModule { }

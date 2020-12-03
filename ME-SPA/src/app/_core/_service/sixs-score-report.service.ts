@@ -71,6 +71,10 @@ export class SixsScoreReportService {
       const link = document.createElement('a');
       const currentTime = new Date();
       const filename = '6S_Score_Report_Detail_' + currentTime.getFullYear().toString() + (currentTime.getMonth() + 1) + currentTime.getDate() + currentTime.toLocaleDateString().replace(/[ ]|[,]|[:]/g, '').trim() + '.xlsx';
-    })
+    });
+  }
+
+  getAuditType1BySixs() {
+    return this.http.get<string[]>(this.baseUrl + 'SixsReport/getaudittype1bysixs');
   }
 }

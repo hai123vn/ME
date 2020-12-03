@@ -27,12 +27,12 @@ export class SixsScoreRecordService {
     private http: HttpClient
   ) { }
 
-  search(page?, itemPerPage?, auditRateSearch?: AuditRateSearch): Observable<PaginationResult<AuditRate6s[]>> {
+  search(page?, itemsPerPage?, auditRateSearch?: AuditRateSearch): Observable<PaginationResult<AuditRate6s[]>> {
     const paginationResult: PaginationResult<AuditRate6s[]> = new PaginationResult<AuditRate6s[]>();
     let params = new HttpParams();
-    if (page != null && itemPerPage != null) {
+    if (page != null && itemsPerPage != null) {
       params = params.append("pageNumber", page);
-      params = params.append("pageSize", itemPerPage);
+      params = params.append("pageSize", itemsPerPage);
     }
     let url = this.baseUrl + "SixsReport/sixs-list";
     return this.http.post<any>(url, auditRateSearch, { observe: "response", params }).pipe(

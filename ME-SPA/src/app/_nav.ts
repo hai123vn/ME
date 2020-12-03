@@ -75,7 +75,7 @@ export const navItems: INavData[] = [
       },
       {
         name: '6S Score Record Report',
-        url: '/'
+        url: '/maintenance/report/sixs-score-report'
       },
       {
         name: 'Water Spider Score Record Report',
