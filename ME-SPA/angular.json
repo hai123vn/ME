@@ -25,6 +25,7 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
               "node_modules/alertifyjs/build/css/alertify.min.css",
+              "node_modules/alertifyjs/build/css/alertify.css",
               "node_modules/alertifyjs/build/css/themes/bootstrap.min.css",
               "node_modules/select2/dist/css/select2.min.css",
               "src/scss/style.scss"
@@ -37,6 +38,7 @@
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js",
               "node_modules/alertifyjs/build/alertify.min.js",
+              "node_modules/alertifyjs/build/alertify.js",
               "node_modules/exceljs/dist/exceljs.min.js",
               "node_modules/file-saver/dist/FileSaver.min.js",
               "node_modules/jquery/dist/jquery.js",

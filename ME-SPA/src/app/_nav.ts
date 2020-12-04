@@ -67,7 +67,7 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'WT Tracking List Report',
-        url: '/',
+        url: '//maintenance/report/wttracking-report',
       },
       {
         name: 'SME Score Record Report',
@@ -79,7 +79,7 @@ export const navItems: INavData[] = [
       },
       {
         name: 'Water Spider Score Record Report',
-        url: '/'
+        url: '/maintenance/report/water-spider-report'
       }
     ]
   }

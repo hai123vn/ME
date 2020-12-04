@@ -11,6 +11,8 @@ import { NgSelect2Module } from 'ng-select2';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SmeScoreReportComponent } from './sme-score-report/sme-score-report.component';
 import { SixsScoreReportComponent } from './sixs-score-report/sixs-score-report.component';
+import { AuditRecDComponent } from './audit-rec-d/audit-rec-d.component';
+import { WaterSpiderReportComponent } from './water-spider-report/water-spider-report.component';
 
 @NgModule({
   imports: [
@@ -27,7 +29,9 @@ import { SixsScoreReportComponent } from './sixs-score-report/sixs-score-report.
   ],
   declarations: [
     SmeScoreReportComponent,
-    SixsScoreReportComponent
+    SixsScoreReportComponent,
+    AuditRecDComponent,
+    WaterSpiderReportComponent
   ]
 })
 export class ReportModule { }

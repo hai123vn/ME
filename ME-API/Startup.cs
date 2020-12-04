@@ -100,6 +100,7 @@ namespace ME_API
             services.AddScoped<IChartByMonthlyService, ChartByMonthlyService>();
             services.AddScoped<IWaterSpiderRecordService, WaterSpiderRecordService>();
             services.AddScoped<IWaterSpiderReportService, WaterSpiderReportService>();
+            services.AddScoped<IWTTrackingReportService, WTTrackingReportService>();
 
             // Swagger
             services.AddSwaggerGen(c =>
